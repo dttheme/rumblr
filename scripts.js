@@ -27,6 +27,17 @@ function initialize() {
       }
 
       //create markers with USGS coords
+      //use .addTo(map), .setView([x,y],z), WE.marker, marker.bindPopup(html)
+
+      // function addSomeMarkers() {
+      //   document.getElementById('addmarkers').disabled = true;
+
+      //   map.setView([51.505, 0], 5);
+      //   var marker = WE.marker([51.5, -0.09]).addTo(map);
+      //   marker.bindPopup("<b>Hello world!</b><br>I am a popup.<br /><span style='font-size:10px;color:#999'>Tip: Another popup is hidden in Cairo..</span>", {maxWidth: 150, closeButton: true}).openPopup();
+
+      //   var marker2 = WE.marker([30.058056, 31.228889]).addTo(map);
+      //   marker2.bindPopup("<b>Cairo</b><br>Yay, you found me!<br />Here, enjoy another polygon..", {maxWidth: 120, closeButton: false});
 
       //pan to coords
 
