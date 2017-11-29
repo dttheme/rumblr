@@ -1,5 +1,5 @@
 
-let numberOfDaysSelected;
+let numberOfDaysSelected = 1;
 
 //when the user submits, the landing page will disappear and the earth will be rendered
 function takeUserInputRevealEarth() {
@@ -40,9 +40,26 @@ function initialize() {
         }).addTo(earth);
     }
 
+//create div with coords, name, t/d, mag written inside
+const USGS_EARTHQUAKE_URL = 'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson';
+function earthquakeDataFromApi() {
+		const query = {
+			starttime: createDateForUrl(dateInPast),
+			endtime: createDateForUrl(date),
+			minmagnitude: 1,
+		};
+		$('.js-submit-button').click(function(event) {
+			$.getJSON(USGS_EARTHQUAKE_URL, query, function(data){
+			console.log(data);
+		})
+	})
+}
+earthquakeDataFromApi();
+
 //takes in coordinate object and puts them on the map
-function populateMarkers() {
+function renderMarkers() {
 	//coordinates from USGS data
+	console.log(${})
     //use .addTo(map), .setView([x,y],z), WE.marker, marker.bindPopup(html)
     //reference API demo: http://examples.webglearth.com/#apidemo
 }
@@ -58,43 +75,28 @@ function displayNumberOfDays() {
 }
 displayNumberOfDays();
 
-//pull data from USGS; coordinates, name, time/date, magnitude
 
-
+//take user day input, count backwards to find past day, transform date for url
 let date = new Date();
-let days = numberOfDaysSelected;
-
 function findDateInPast(date, days) {
 	return new Date(
 		date.getFullYear(),
 		date.getMonth(),
-		date.getDate() - days,
-		date.getHours(),
-        date.getMinutes(),
-        date.getSeconds(),
-        date.getMilliseconds()
+		date.getDate() - days
 		);
 }
-console.log(findDateInPast(date, days));
-
-
-
-//create div with coords, name, t/d, mag written inside
-const USGS_EARTHQUAKE_URL = 'https://earthquake.usgs.gov/fdsnws/event/1/query?';
-let todaysDateString = date
-function earthquakeDataFromApi() {
-		const query = {
-			format: 'geojson',
-			// starttime: ,
-			minmagnitude: 1,
-		}
-		$('.js-submit-button').click(function(event) {
-			$.getJSON(USGS_EARTHQUAKE_URL, query, function(data){
-			console.log(data);
-		})
-	})
+let dateInPast = (findDateInPast(date, numberOfDaysSelected));
+function createDateForUrl(d) {
+	let dateInISO = (d.toISOString());
+	let dateForURL = dateInISO.slice(0,9);
 }
-earthquakeDataFromApi();
+
+//pull data from USGS; coordinates, name, time/date, magnitude
+
+
+
+
+
 
 
 
