@@ -20,7 +20,6 @@ function submitDateToApi() {
 	})
 }
 
-
 //when the user submits, the landing page will disappear and the earth will be rendered
 function revealEarth() {
 	$('.js-submit-button').click(function(event) {
@@ -51,14 +50,12 @@ function initialize() {
         });
         //make Earth
         var earth = new WE.map('earth_div', options);
-        WE.tileLayer('http://tileserver.maptiler.com/nasa/{z}/{x}/{y}.jpg', {
+        WE.tileLayer('https://tileserver.maptiler.com/nasa/{z}/{x}/{y}.jpg', {
         	minZoom: 0,
         	maxZoom: 5,
         	attribution: 'NASA'
         }).addTo(earth);
     }
-
-
 
 //take user day input, count backwards to find past day, transform date for url
 function findDateInPast(date, days) {
@@ -68,10 +65,6 @@ function findDateInPast(date, days) {
 		date.getDate() - days
 		);
 }
-
-
-
-
 //create div with coords, name, t/d, mag written inside
 const USGS_EARTHQUAKE_URL = 'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson';
 function earthquakeDataFromApi() {
@@ -114,13 +107,7 @@ displayNumberOfDays();
 
 
 
-
 //pull data from USGS; coordinates, name, time/date, magnitude
-
-
-
-
-
 
 
 
