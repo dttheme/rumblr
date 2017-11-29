@@ -60,19 +60,39 @@ displayNumberOfDays();
 
 //pull data from USGS; coordinates, name, time/date, magnitude
 
+
+let date = new Date();
+let days = numberOfDaysSelected;
+
+function findDateInPast(date, days) {
+	return new Date(
+		date.getFullYear(),
+		date.getMonth(),
+		date.getDate() - days,
+		date.getHours(),
+        date.getMinutes(),
+        date.getSeconds(),
+        date.getMilliseconds()
+		);
+}
+console.log(findDateInPast(date, days));
+
+
+
 //create div with coords, name, t/d, mag written inside
-const USGS_EARTHQUAKE_URL = 'https://earthquake.usgs.gov/fdsnws/event/1/query'
+const USGS_EARTHQUAKE_URL = 'https://earthquake.usgs.gov/fdsnws/event/1/query?';
+let todaysDateString = date
 function earthquakeDataFromApi() {
 		const query = {
-			starttime: '2017-11-28',
-			endtime: '2017-11-28',
+			format: 'geojson',
+			// starttime: ,
 			minmagnitude: 1,
 		}
-		// $('.js-submit-button').click(function(event) {
+		$('.js-submit-button').click(function(event) {
 			$.getJSON(USGS_EARTHQUAKE_URL, query, function(data){
 			console.log(data);
 		})
-	// })
+	})
 }
 earthquakeDataFromApi();
 
