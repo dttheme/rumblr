@@ -1,14 +1,33 @@
-<!DOCTYPE HTML>
-<html>
-  <head>
-    <script src="http://www.webglearth.com/v2/api.js"></script>
-    <script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src='scripts.js'></script>
-    <style type="text/css" src='styles.css'></style>
-      <title>WebGL Earth API: Satellite</title>
-    </head>
-    <body onload="initialize()">
-      <div id="earth_div"></div>
-  </body>
-</html>
+	<!DOCTYPE HTML>
+	<html>
+	<head>
+
+		<link rel="stylesheet" type="text/css" href='styles.css'>
+		<title>Earthquake Tracking</title>
+	</head>
+	<body>
+		<header><h1>Earthquake Tracking</h1></header>
+		<div class="landing-page">
+			<h2>Welcome!</h2>
+			<p>I would like to see earthquakes from the last <span id='numberOfDays'>1</span> day(s).</p>
+			<div id="slidecontainer">
+  				<input type="range" min="1" max="30" value="1" class="slider" id="myRange">
+			</div>
+			<button type="submit" class='js-submit-button'>Submit</button>
+		</div>
+		<main>
+			
+			<div id="earth_div"></div>
+			<section class='left-section hidden'>
+			<p>Welcome!</p>
+			</section>
+			<section class="right-section hidden">
+			</section>
+		</main>
+		
+		<script src="http://www.webglearth.com/v2/api.js"></script>
+		<script
+		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script src='scripts.js'></script>
+	</body>
+	</html>
