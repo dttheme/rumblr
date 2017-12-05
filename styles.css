@@ -38,13 +38,14 @@ h1 {
 
 .left-section, .right-section {
 	height: 100vh;
-	width: 230px;
+	width: 25%;
 	background-color: darkgrey;
 	margin: 0;
 	position: absolute;
 	top: 30px;
 	text-align: center;
 	overflow: scroll;
+	font-size: 14px;
 	
 }
 .left-section {
