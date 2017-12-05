@@ -1,7 +1,7 @@
 	<!DOCTYPE HTML>
 	<html>
 	<head>
-
+		<script src="https://use.fontawesome.com/7f641b72ff.js"></script>
 		<link rel="stylesheet" type="text/css" href='styles.css'>
 		<title>Earthquake Tracking</title>
 	</head>
@@ -9,9 +9,11 @@
 		<header><h1>Earthquake Tracking</h1></header>
 		<div class="landing-page">
 			<h2>Welcome!</h2>
-			<p>I would like to see earthquakes from the last <span id='numberOfDays'>1</span> day(s).</p>
 			<div id="slidecontainer">
+			<p>I would like to see earthquakes from the last <span id='numberOfDays'>1</span> day(s).</p>
   				<input type="range" min="1" max="30" value="1" class="slider" id="myRange">
+  				<p>I would like to see earthquakes with a magnitude of <span id='minimumMagnitude'>1</span> and above.</p>
+  				<input type="range" min="1" max="10" value="1" step='0.5' class="slider" id="magnitudeRange">
 			</div>
 			<button type="submit" class='js-submit-button'>Submit</button>
 		</div>
@@ -24,7 +26,7 @@
 
 				</div>
 			</section>
-			<section class="right-section hidden">
+			<!-- <section class="right-section hidden"> -->
 			</section>
 		</main>
 		
