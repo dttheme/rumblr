@@ -69,11 +69,11 @@ $('.js-submit-button').click(function(event) {
 					for (i=0; i < data.features.length; i++) {
 						let features = (data.features[i]);
 						renderMarkers(features);	
+						renderList(features);
 					}
 
 				});
 	        }
-
 			//takes in coordinate object and puts them on the map
 			function renderMarkers(features) {
 				// console.log(features.geometry.coordinates);
@@ -87,12 +87,24 @@ $('.js-submit-button').click(function(event) {
 					<!--Coordinates: ${features.geometry.coordinates[1], features.geometry.coordinates[0]}-->
 					</p>`)
 			}
-			    // //when the marker is clicked, or when the user clicks a location in the list, the earth will pan to that marker
+			    // // //when the marker is clicked, or when the user clicks a location in the list, the earth will pan to that marker
 			    // function panToMarker(features) {
 			    // 	marker.click(function(event) {
 			    // 		map.panTo([features.geometry.coordinates[1], features.geometry.coordinates[0]]);
 			    // 	});
 			    // }
+			    function renderList(features) {
+			    	earthquakeDataDiv = 
+			    	`<div class='dataDiv'>
+			    		<p>
+							<b>Location:</b> ${features.properties.place} <br>
+							<b>Date:</b> ${humanDate} <br>
+							<b>Magnitude:</b> ${features.properties.mag} <br>
+						</p>
+						</div>
+			    		`;
+			    	$('.left-section').append(earthquakeDataDiv)
+			    }
 			    earthquakeDataFromApi();
 			}
 // ------
@@ -107,9 +119,6 @@ $('.js-submit-button').click(function(event) {
 			)
 	}
 	
-
-
-
 //pull data from USGS; coordinates, name, time/date, magnitude
 
 //pull tweets from Twitter using coordinates and #earthquake

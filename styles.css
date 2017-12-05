@@ -4,6 +4,9 @@
   	background-color: black;
   	box-sizing: border-box;
   }
+  header {
+  	position: inline;
+  }
   .landing-page {
   	width: 700px;
   	height: 300px;
@@ -32,21 +35,20 @@ h1 {
 	font-size: 20px;
 	text-align: center;
 }
-main {
-	position: relative;
-}
+
 .left-section, .right-section {
-	height: 80%;
-	width: 300px;
-	background-color: white;
-	border-radius: 10px;
-	margin: 10px;
+	height: 100vh;
+	width: 230px;
+	background-color: darkgrey;
+	margin: 0;
 	position: absolute;
 	top: 30px;
 	text-align: center;
+	overflow: scroll;
 	
 }
 .left-section {
+	top: 0;
 	left: 0;
 }
 .right-section {
@@ -58,8 +60,12 @@ main {
   	bottom: 0; 
   	left: 0;
     background-color: #000; 
-/*    position: absolute !important;*/
+	position: relative;
 }
 .hidden {
 	display: none;
+}
+.dataDiv {
+	 border-bottom: 2px solid black;
+	 padding: 5px;
 }
