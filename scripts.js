@@ -1,4 +1,5 @@
 
+let coordArray = [];
 $('.js-submit-button').click(function(event) {	
 
 	function createDateForURL(date) {
@@ -68,43 +69,46 @@ $('.js-submit-button').click(function(event) {
 						//Pretty print JSON					
 						console.log(JSONdata);
 					for (i=0; i < data.features.length; i++) {
-						let features = (data.features[i]);
-						renderMarkers(features);	
-						renderList(features);
+						let feature = (data.features[i]);
+						renderMarkers(feature);	
+						renderEarthquake(feature, i);
+						let coords = feature.geometry.coordinates;
+						console.log(coords);
+						coordArray.push(coords);
 					}
-					let coords = data.features.geometry.coordinates;
-					console.log(coords);
-					// onClickPanTo(coords);
 
 					renderTotalEarthquakes(data);
 				});
 	        }
 
+
+
 //renders markers on map using coordinates
-			function renderMarkers(features) {
-				epochDate = features.properties.time;
+			function renderMarkers(feature) {
+				epochDate = feature.properties.time;
 				humanDate = new Date(epochDate);
-				var marker = WE.marker([features.geometry.coordinates[1], features.geometry.coordinates[0]], 'pin.png', 32, 32).addTo(earth);
+				var marker = WE.marker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], 'pin.png', 32, 32).addTo(earth);
 				marker.bindPopup(`<p>
-					<b>Location:</b> ${features.properties.place} <br>
+					<b>Location:</b> ${feature.properties.place} <br>
 					<b>Date:</b> ${humanDate} <br>
-					<b>Magnitude:</b> ${features.properties.mag} <br>
-					<!--Coordinates: ${features.geometry.coordinates[1], features.geometry.coordinates[0]}-->
+					<b>Magnitude:</b> ${feature.properties.mag} <br>
+					<!--Coordinates: ${feature.geometry.coordinates[1], feature.geometry.coordinates[0]}-->
 					</p>`)
 			}
 			
 
 //creates a side bar featuring details
-			  function renderList(features) {
+			  function renderEarthquake(feature, i) {
+			  	let buttonIdentifier = 'tb' + i;
 			    	earthquakeDataDiv = 
 			    	`<div class='dataDiv'>
 			    		<p>
-							<b>Location:</b> ${features.properties.place} <br>
+							<b>Location:</b> ${feature.properties.place} <br>
 							<b>Date:</b> ${humanDate} <br>
-							<b>Magnitude:</b> ${features.properties.mag} <br>
+							<b>Magnitude:</b> ${feature.properties.mag} <br>
 						</p>
-						<button class='travelButton' onclick='panTo();'>Go!</button>
-						</div>
+						<button class='travelButton' name=${buttonIdentifier}>Go!</button>
+					</div>
 			    		`;
 			    	$('.left-section').append(earthquakeDataDiv)
 		//make bar slide into the margins
@@ -134,12 +138,22 @@ $('.js-submit-button').click(function(event) {
 					date.getDate() - days
 					)
 			}
-	
-
-
 	revealEarth();
 });
  //end submit button actions
+
+
+//find dataDiv, then find button within dataDiv
+ $('.left-section').on('click', '.travelButton' function(event) {
+ 	//this will be the button event
+ 	//button name will be a unique identifier
+ 	//parse unique identifier to get number
+ 	//.slice();
+ 	//.parseInt();
+ 	//pass number to onClickPanTo
+ 	//onClickPanTo will find the corresponding coordinates in the array
+ 		onClickPanTo(coords);
+ });
 
 //listens to the user input, updates the DOM
 function displayNumberOfDays() {
