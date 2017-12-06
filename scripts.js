@@ -1,21 +1,19 @@
 
 $('.js-submit-button').click(function(event) {	
 
-	function createDateForUrl(date) {
+	function createDateForURL(date) {
 		let dateInISO = (date.toISOString());
 		let dateForURL = dateInISO.slice(0,10);
 		return dateForURL;
 	}
 
-	function submitDateToApi() {
+	function submitDateToAPI() {
 		let today = new Date();
 		let numberOfDaysSelected = $('#myRange').val();
 		let dateInPast = (findDateInPast(today, numberOfDaysSelected));
-		// let endTimeUrlString = createDateForUrl(today);
-		// console.log('endTimeUrlString: ' + endTimeUrlString);
-		let startTimeUrlString = createDateForUrl(dateInPast);
-		console.log('startTimeUrlString: ' + startTimeUrlString);
-		return	startTimeUrlString;
+		let startTimeURLString = createDateForURL(dateInPast);
+		console.log('startTimeURLString: ' + startTimeURLString);
+		return	startTimeURLString;
 	}
 
 //when the user submits, the landing page will disappear and the earth will be rendered
@@ -57,25 +55,28 @@ $('.js-submit-button').click(function(event) {
 
 //create div with coords, name, t/d, mag written inside
 	        const USGS_EARTHQUAKE_URL = 'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson';
-	        function earthquakeDataFromApi() {
-	        	console.log('submitDateToApi output: ' + submitDateToApi());
+	        function earthquakeDataFromAPI() {
+	        	console.log('submitDateToApi output: ' + submitDateToAPI());
 	        	console.log($('#magnitudeRange').val());
 	        	minMag = $('#magnitudeRange').val();
 	        	const query = {
-	        		starttime: submitDateToApi(),
+	        		starttime: submitDateToAPI(),
 	        		minmagnitude: minMag
 	        	};
 	        	$.getJSON(USGS_EARTHQUAKE_URL, query, function(data){
 	        		let JSONdata = JSON.stringify(data, null, 2);
-					console.log(JSONdata);
+						//Pretty print JSON					
+						console.log(JSONdata);
 					for (i=0; i < data.features.length; i++) {
 						let features = (data.features[i]);
 						renderMarkers(features);	
 						renderList(features);
 					}
+					let coords = data.features.geometry.coordinates;
+					console.log(coords);
+					// onClickPanTo(coords);
+
 					renderTotalEarthquakes(data);
-
-
 				});
 	        }
 
@@ -102,22 +103,28 @@ $('.js-submit-button').click(function(event) {
 							<b>Date:</b> ${humanDate} <br>
 							<b>Magnitude:</b> ${features.properties.mag} <br>
 						</p>
-						<button class='travelButton'>Go!</button>
+						<button class='travelButton' onclick='panTo();'>Go!</button>
 						</div>
 			    		`;
 			    	$('.left-section').append(earthquakeDataDiv)
-			    	
+		//make bar slide into the margins
 			    }
+
+//button pans map to earthquake coords
+				function onClickPanTo(coords) {
+					earth.panTo([coords]);
+				}
+
 //give a count of the total earthquakes on the sidebar
 			    function renderTotalEarthquakes(data) {
 			    	$('.totalEarthquakes').html(
-			    	`<p style='font-size=20px;'><b>Total Earthquakes: ${data.metadata.count}</b></p>`
+			    	`<p style='font-size=40px;'><b>Total Earthquakes: ${data.metadata.count}</b></p>`
 			    	)
 			    }
-
-			    earthquakeDataFromApi();
+			    earthquakeDataFromAPI();
 
 }
+//end initialize()
 
 //take user day input, count backwards to find past day, transform date for url
 			function findDateInPast(date, days) {
@@ -133,10 +140,6 @@ $('.js-submit-button').click(function(event) {
 	revealEarth();
 });
  //end submit button actions
-
-
-
-
 
 //listens to the user input, updates the DOM
 function displayNumberOfDays() {
