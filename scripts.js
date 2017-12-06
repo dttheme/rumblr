@@ -67,13 +67,12 @@ $('.js-submit-button').click(function(event) {
 	        	$.getJSON(USGS_EARTHQUAKE_URL, query, function(data){
 	        		let JSONdata = JSON.stringify(data, null, 2);
 						//Pretty print JSON					
-						console.log(JSONdata);
+						// console.log(JSONdata);
 					for (i=0; i < data.features.length; i++) {
 						let feature = (data.features[i]);
 						renderMarkers(feature);	
 						renderEarthquake(feature, i);
 						let coords = feature.geometry.coordinates;
-						console.log(coords);
 						coordArray.push(coords);
 					}
 
@@ -97,22 +96,7 @@ $('.js-submit-button').click(function(event) {
 			}
 			
 
-//creates a side bar featuring details
-			  function renderEarthquake(feature, i) {
-			  	let buttonIdentifier = 'tb' + i;
-			    	earthquakeDataDiv = 
-			    	`<div class='dataDiv'>
-			    		<p>
-							<b>Location:</b> ${feature.properties.place} <br>
-							<b>Date:</b> ${humanDate} <br>
-							<b>Magnitude:</b> ${feature.properties.mag} <br>
-						</p>
-						<button class='travelButton' name=${buttonIdentifier}>Go!</button>
-					</div>
-			    		`;
-			    	$('.left-section').append(earthquakeDataDiv)
-		//make bar slide into the margins
-			    }
+
 
 //button pans map to earthquake coords
 				function onClickPanTo(coords) {
@@ -130,6 +114,54 @@ $('.js-submit-button').click(function(event) {
 }
 //end initialize()
 
+
+	revealEarth();
+});
+ //end submit button actions
+
+//creates a side bar featuring details
+function renderEarthquake(feature, i) {
+	let buttonIdentifier = 'tb' + i;
+	earthquakeDataDiv = 
+	`<div class='dataDiv'>
+		<p>
+			<b>Location:</b> ${feature.properties.place} <br>
+			<b>Date:</b> ${humanDate} <br>
+			<b>Magnitude:</b> ${feature.properties.mag} <br>
+		</p>
+		<button class='travelButton' data-coordinate-id=${buttonIdentifier}>Go!</button>
+	</div>
+		`;
+	$('.earthquakeData').append(earthquakeDataDiv)
+	//make bar slide into the margins
+}
+
+
+function parseCoords() {
+	let coordID = $('.travelButton').data('coordinate-id');
+ 	console.log(coordID);
+}
+
+
+ $('.earthquakeData').on('click', '.travelButton', function(event) {
+ 	let coordIDString = $(this).data('coordinate-id');
+ 	let coordIDCutString = coordIDString.slice(2);
+ 	let coordArrayIndex = parseInt(coordIDCutString);
+ 	earth.panTo(coordArray[coordArrayIndex])
+ 	console.log(coordArray[coordArrayIndex]);
+ });
+
+
+ 	//this will be the button event
+ 	//button name will be a unique identifier
+ 	//parse unique identifier to get number
+ 	//.slice();
+ 	//.parseInt();
+ 	//pass number to onClickPanTo
+ 	//onClickPanTo will find the corresponding coordinates in the array
+ 		// onClickPanTo(coords);
+
+
 //take user day input, count backwards to find past day, transform date for url
 			function findDateInPast(date, days) {
 				return new Date(
@@ -138,22 +170,6 @@ $('.js-submit-button').click(function(event) {
 					date.getDate() - days
 					)
 			}
-	revealEarth();
-});
- //end submit button actions
-
-
-//find dataDiv, then find button within dataDiv
- $('.left-section').on('click', '.travelButton' function(event) {
- 	//this will be the button event
- 	//button name will be a unique identifier
- 	//parse unique identifier to get number
- 	//.slice();
- 	//.parseInt();
- 	//pass number to onClickPanTo
- 	//onClickPanTo will find the corresponding coordinates in the array
- 		onClickPanTo(coords);
- });
 
 //listens to the user input, updates the DOM
 function displayNumberOfDays() {
