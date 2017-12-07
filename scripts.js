@@ -3,11 +3,12 @@
 var options = {
 	atmosphere: true, 
 	sky: true,
-	center: [0, 0], 
 	zoom: 0,
 	zooming: true
 };
 var earth = new WE.map('earth_div', options);
+markers =[];
+let centered = false;
 let coordArray = [];
 //------------------------------------------------
 //when the document is ready, create the globe
@@ -108,27 +109,38 @@ function renderMarkers(feature) {
 	epochDate = feature.properties.time;
 	humanDate = new Date(epochDate);
 	var marker = WE.marker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], 'pin.png', 32, 32).addTo(earth);
+	markers.push(marker);
 	marker.bindPopup(`<p>
 		<b>Location:</b> ${feature.properties.place} <br>
 		<b>Date:</b> ${humanDate} <br>
 		<b>Magnitude:</b> ${feature.properties.mag} <br>
 		<!--Coordinates: ${feature.geometry.coordinates[1], feature.geometry.coordinates[0]}-->
 		</p>`)
+	// if (centered = true) {
+	// 	marker.openPopup();
+	// }
 }
 
-//button pans map to earthquake coords
-function parseCoordArray(coords) {
-	let coordIDString = $(this).data('coordinate-id');
-	let coordIDCutString = coordIDString.slice(2);
-	let coordArrayIndex = parseInt(coordIDCutString);
-	let currentCoords = coordArray[coordArrayIndex];
-	console.log(currentCoords[1]);
-	console.log(currentCoords[0]);
-	panTo(currentCoords[1], currentCoords[0]);
+function findCurrentCenterOpenPopup() {
+	center = earth.getCenter();
+	centerLat = (center[0]).toFixed(2);
+	centerLong = (center[1]).toFixed(2);
+	console.log(centerLat, centerLong)
+	
 }
+findCurrentCenterOpenPopup();
 
-function panTo(lat, long) {
-	earth.panTo([lat, long])
+
+// //button pans map to earthquake coords
+// function parseCoordArray(coords) {
+	
+// 	console.log((currentCoords[1]).toFixed(2));
+// 	console.log((currentCoords[0]).toFixed(2));
+	
+// }
+
+function setView(lat, long) {
+	earth.setView([lat, long])
 }
 
 //give a count of the total earthquakes on the sidebar
@@ -138,7 +150,28 @@ function renderTotalEarthquakes(data) {
 		)
 }
 
-$('.earthquakeData').on('click', '.travelButton', parseCoordArray);
+$('.earthquakeData').on('click', '.travelButton', function(event) {
+	let coordIDString = $(this).data('coordinate-id');
+	let coordIDCutString = coordIDString.slice(2);
+	let coordArrayIndex = parseInt(coordIDCutString);
+	let currentCoords = coordArray[coordArrayIndex];
+	let targetCenter = ((currentCoords[1]).toFixed(2), (currentCoords[0]).toFixed(2));
+	console.log('targetCenter is ' + (currentCoords[1]).toFixed(2), (currentCoords[0]).toFixed(2))
+	//when go button is clicked, setView to coordinates
+	setView(currentCoords[1], currentCoords[0]);
+
+	let center = earth.getCenter();
+	let centerLat = (center[0]).toFixed(2);
+	let centerLong = (center[1]).toFixed(2);
+	setViewCenter = (centerLat, centerLong);
+	console.log((centerLat));
+
+	//if the setView matches the marker coordinates, tell renderMarkers
+	if ((centerLat == (currentCoords[1]).toFixed(2)) && centerLong == (currentCoords[0]).toFixed(2)) {
+		let centered = true;
+	}
+});
+
 
 //creates a side bar featuring details
 function renderEarthquake(feature, i) {
@@ -157,21 +190,6 @@ function renderEarthquake(feature, i) {
 	//make bar slide into the margins
 }
 
-
-
-
- 	//this will be the button event
- 	//button name will be a unique identifier
- 	//parse unique identifier to get number
- 	//.slice();
- 	//.parseInt();
- 	//pass number to onClickPanTo
- 	//onClickPanTo will find the corresponding coordinates in the array
- 		// onClickPanTo(coords);
-
-
-
-
 //listens to the user input, updates the DOM
 function displayNumberOfDays() {
 	$(document).on('input', '#myRange', function() {
@@ -183,6 +201,7 @@ function displayMinimumMagnitude() {
 		$('#minimumMagnitude').html( $(this).val() );
 	});
 }
+
 displayMinimumMagnitude();
 displayNumberOfDays();
 
