@@ -3,21 +3,45 @@
   	margin: 0;
   	background-color: black;
   	box-sizing: border-box;
-  	font-family: 'Poppins', sans-serif;
+  	font-family: 'Open Sans', sans-serif;
+  }
+  body {
+  	overflow: hidden;
   }
   header {
   	position: inline;
   }
+  main {
+  	position: relative;
+  }
+  #earth_div{
+  	top: 0; 
+  	right: 0; 
+  	bottom: 0; 
+  	left: 0;
+  	height: 100vh;
+/*  	width: 100vh;*/
+    background-color: #000; 
+	position: absolute;
+}
   .landing-page {
-  	width: 700px;
-  	height: 300px;
-  	margin: 20px auto;
-  	background-color: white;
-  	border-radius: 10px;
+  	font-size: 17px;
+  	font-weight: 700;
+  	width: 340px;
+  	height: 75vh;
+  	margin: 20px;
+  	background-color: rgba(223, 237, 255, 0.6);
+  	border-radius: 5px;
   	text-align: center;
   	padding: 20px;
+  	position: absolute;
+  	top: 00%;
+  	left: 1%;
+  	z-index: 1;
+  	margin-top: 5%;
   }
   #slidecontainer {
+  	margin: 50px 0;
   	width: 100%;
   }
   .slider {
@@ -31,43 +55,96 @@
     -webkit-transition: .2s;
     transition: opacity .2s;
 }
-h1 {
+
+.submit, .travelButton {
+	border: 0;
+	border-radius: 5px;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 15px;
+	font-weight: 700;
+		color: white;
+	background-color: #112F57;
+}
+
+.submit {
+	padding: 10px 60px;
+}
+
+.travelButton {
+	padding: 3px 60px;
+}
+h1, h2 {
 	color: white;
-	font-size: 20px;
-	text-align: center;
+	font-size: 50px;
+	font-weight: 900;
+	font-family: 'Poppins', 'Open Sans', sans-serif;
+	float: left;
+	padding: 0 10px;
+	margin: 0;
+	display: inline;
+}
+h3 {
+	font-size: 23px;
+	padding-left: 10px;
+}
+
+.icon {
+	float: left;
+	color: #112F57;
+}
+.subheading {
+	display: block;
+	float: left;
+	font-weight: 900;
+	padding: 5px 10px;
+	margin: 0;
+	font-size: 14px;
 }
 
 .left-section, .right-section {
 	height: 100vh;
 	width: 25%;
-	background-color: darkgrey;
+	background-color: rgba(223, 237, 255, 0.6);
 	margin: 0;
 	position: absolute;
 	top: 30px;
-	text-align: center;
-	overflow: scroll;
+	overflow-y: scroll;
 	font-size: 14px;
-	
 }
+::-webkit-scrollbar {
+    width: 15px;
+}
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(211, 85, 90, 0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(255,0,0,0.4); 
+}
+
 .left-section {
 	top: 0;
 	left: 0;
 }
 .right-section {
+	top:0;
 	right: 0;
 }
-  #earth_div{
-  	top: 0; 
-  	right: 0; 
-  	bottom: 0; 
-  	left: 0;
-    background-color: #000; 
-	position: relative;
+.totalEarthquakes {
+	padding: 0 10px;
 }
+  
 .hidden {
 	display: none;
 }
 .dataDiv {
-	 border-bottom: 2px solid black;
-	 padding: 5px;
+	 border-bottom: 1px solid black;
+	 padding: 10px;
 }

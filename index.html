@@ -1,33 +1,39 @@
 	<!DOCTYPE HTML>
 	<html>
 	<head>
-		<!-- <script src="https://use.fontawesome.com/7f641b72ff.js"></script> -->
-		<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+		<script src="https://use.fontawesome.com/7f641b72ff.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans|Poppins:400,900i" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href='styles.css'>
 		<title>Earthquake Tracking</title>
 	</head>
 	<body>
-		<header><h1>Earthquake Tracking</h1></header>
+		<header></header>
+		<main>
 		<div class="landing-page">
-			<h2>Welcome!</h2>
+			<h1>Rumblr</h1><i class="fa fa-exchange fa-4x icon" aria-hidden="true"></i><br><br>
+			<p class="subheading">Earthquake tracking and information sharing</p><br><br>
 			<div id="slidecontainer">
 			<p>I would like to see earthquakes from the last <span id='numberOfDays'>1</span> day(s).</p>
   				<input type="range" min="1" max="30" value="1" class="slider" id="myRange">
   				<p>I would like to see earthquakes with a magnitude of <span id='minimumMagnitude'>1</span> and above.</p>
   				<input type="range" min="1" max="10" value="1" step='0.5' class="slider" id="magnitudeRange">
 			</div>
-			<button type="submit" class='js-submit-button'>Submit</button>
+			<button type="submit" class='js-submit-button submit'>Submit</button>
 		</div>
-		
-		<main>
-
 			<div id="earth_div"></div>
-		<!-- 	</section>
-			<section class="right-section hidden"> -->
 			<section class='left-section hidden'>
+				<h2>Rumblr</h2><i class="fa fa-exchange fa-4x icon" aria-hidden="true"></i><br><br><br>
+				<h3>Results</h3>
 				<div class='totalEarthquakes'></div>
 				<div class="earthquakeData"></div>
 			</section>
+			<section class='right-section hidden'>
+				<div class="right-top">
+					
+				</div>
+				<div class="right-bottom"></div>
+			</section>
+			
 		</main>
 		
 		<script src="https://www.webglearth.com/v2/api.js"></script>

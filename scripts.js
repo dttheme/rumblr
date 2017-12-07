@@ -9,6 +9,7 @@ var options = {
 var earth = new WE.map('earth_div', options);
 markers =[];
 let centered = false;
+let stop = false;
 let coordArray = [];
 //------------------------------------------------
 //when the document is ready, create the globe
@@ -20,6 +21,7 @@ $(document).ready(function() {
 $('.js-submit-button').click(function(event) {	
 	revealEarth();
 	earthquakeDataFromAPI();
+	newsDataFromAPI();
 });
 
 //counts backwards to find past day
@@ -64,9 +66,20 @@ function animateEarth(vel) {
 		var elapsed = before? now - before: 0;
 		before = now;
 		earth.setCenter([c[0], c[1] + vel *(elapsed/500)]);
+		if(stop) {
+			return
+		}
 		requestAnimationFrame(animate);
 	});
 }
+
+$('#earth_div').click(function() {
+	stop = true;
+	setTimeout(function() {
+		stop = false;
+		animation(0.1);
+	}, 2);
+});
 
 //tiles the globe
 function initialize() {
@@ -82,16 +95,16 @@ function initialize() {
 const USGS_EARTHQUAKE_URL = 'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson';
 function earthquakeDataFromAPI() {
 	console.log('submitDateToApi output: ' + submitDateToAPI());
-	console.log($('#magnitudeRange').val());
+	// console.log($('#magnitudeRange').val());
 	minMag = $('#magnitudeRange').val();
 	const query = {
 		starttime: submitDateToAPI(),
 		minmagnitude: minMag
 	};
 	$.getJSON(USGS_EARTHQUAKE_URL, query, function(data){
-		let JSONdata = JSON.stringify(data, null, 2);
+		let earthquakeJSON = JSON.stringify(data, null, 2);
 						//Pretty print JSON					
-						// console.log(JSONdata);
+						// console.log(earthquakeJSON);
 						for (i=0; i < data.features.length; i++) {
 							let feature = (data.features[i]);
 							renderMarkers(feature);	
@@ -145,8 +158,9 @@ function setView(lat, long) {
 
 //give a count of the total earthquakes on the sidebar
 function renderTotalEarthquakes(data) {
+	let dayNumber = $('#myRange').val()
 	$('.totalEarthquakes').html(
-		`<p style='font-size=40px;'><b>Total Earthquakes: ${data.metadata.count}</b></p>`
+		`<p style='font-size:17px; font-weight: 900;'>There have been ${data.metadata.count} earthquakes in the last ${dayNumber} day(s) that match your search.</p>`
 		)
 }
 
@@ -172,11 +186,10 @@ $('.earthquakeData').on('click', '.travelButton', function(event) {
 	}
 });
 
-
 //creates a side bar featuring details
 function renderEarthquake(feature, i) {
 	let buttonIdentifier = 'tb' + i;
-	earthquakeDataDiv = 
+	earthquakeDataHTML = 
 	`<div class='dataDiv'>
 	<p>
 	<b>Location:</b> ${feature.properties.place} <br>
@@ -186,7 +199,17 @@ function renderEarthquake(feature, i) {
 	<button class='travelButton' data-coordinate-id=${buttonIdentifier}>Go!</button>
 	</div>
 	`;
-	$('.earthquakeData').append(earthquakeDataDiv)
+	infoUnavailable = `
+	<div class='infoUnavailable'>
+	<p>Sorry, there are no earthquakes that match your search.</p>
+	</div>
+	`
+	if (feature != undefined) {
+		$('.earthquakeData').append(earthquakeDataHTML)
+	} else {
+		$('.earthquakeDataDiv').append(infoUnavailable);
+	}
+	
 	//make bar slide into the margins
 }
 
@@ -200,6 +223,39 @@ function displayMinimumMagnitude() {
 	$(document).on('input', '#magnitudeRange', function() {
 		$('#minimumMagnitude').html( $(this).val() );
 	});
+}
+
+//News API ---------------------------------------------------------------------------------
+
+//grab JSON from NewsAPI
+const NEWS_URL = 'https://newsapi.org/v2/everything?q=earthquake'
+function newsDataFromAPI() {
+	const query = {
+		from: submitDateToAPI(),
+		language: 'en',
+		sortBy: 'relevency',
+		apiKey: '84025f0f2bdb42febe0bacbdc6c3391b'
+	}
+	$.getJSON(NEWS_URL, query, function(data) {
+		let newsJSON = JSON.stringify(data, null, 2);
+		console.log(newsJSON);
+		for (i=0; i < data.articles.length; i++) {
+					let article = (data.articles[i]);
+					renderNews(article);
+						}
+	
+	});
+}
+
+function renderNews(article) {
+	newsDivData = `
+	<div class='newsDiv'>
+	<p>${article.title}</p>
+	<p>${article.author}</p>
+	<p>${article.description}</p>
+	</div>
+	`
+	$('.right-top').append(newsDivData);
 }
 
 displayMinimumMagnitude();
