@@ -7,8 +7,8 @@ var options = {
 	zooming:false
 };
 var earth = new WE.map('earth_div', options);
-markers =[];
-let centered = false;
+let markers = [];
+let currentIndex = null;
 let stop = false;
 let coordArray = [];
 //------------------------------------------------
@@ -107,7 +107,8 @@ function earthquakeDataFromAPI() {
 						// console.log(earthquakeJSON);
 						for (i=0; i < data.features.length; i++) {
 							let feature = (data.features[i]);
-							renderMarkers(feature);	
+							let currentFeature = feature;
+							renderMarker(feature);	
 							renderEarthquake(feature, i);
 							let coords = feature.geometry.coordinates;
 							coordArray.push(coords);
@@ -118,7 +119,7 @@ function earthquakeDataFromAPI() {
 }
 
 //renders markers on map using coordinates
-function renderMarkers(feature) {
+function renderMarker(feature) {
 	epochDate = feature.properties.time;
 	humanDate = new Date(epochDate);
 	var marker = WE.marker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], 'pin.png', 32, 32).addTo(earth);
@@ -129,19 +130,23 @@ function renderMarkers(feature) {
 		<b>Magnitude:</b> ${feature.properties.mag} <br>
 		<!--Coordinates: ${feature.geometry.coordinates[1], feature.geometry.coordinates[0]}-->
 		</p>`)
-	// if (centered = true) {
-	// 	marker.openPopup();
-	// }
-}
-
-function findCurrentCenterOpenPopup() {
-	center = earth.getCenter();
-	centerLat = (center[0]).toFixed(2);
-	centerLong = (center[1]).toFixed(2);
-	console.log(centerLat, centerLong)
 	
 }
-findCurrentCenterOpenPopup();
+
+
+// function renderMarker({ 
+// 	var marker = markers[markerID];
+// 	 marker.openPopup(); 
+// 	}
+
+// function findCurrentCenterOpenPopup() {
+// 	center = earth.getCenter();
+// 	centerLat = (center[0]).toFixed(2);
+// 	centerLong = (center[1]).toFixed(2);
+// 	console.log(centerLat, centerLong)
+	
+// }
+// findCurrentCenterOpenPopup();
 
 
 // //button pans map to earthquake coords
@@ -165,25 +170,29 @@ function renderTotalEarthquakes(data) {
 }
 
 $('.earthquakeData').on('click', '.travelButton', function(event) {
+	//this is the coordinates from the marker
 	let coordIDString = $(this).data('coordinate-id');
 	let coordIDCutString = coordIDString.slice(2);
 	let coordArrayIndex = parseInt(coordIDCutString);
 	let currentCoords = coordArray[coordArrayIndex];
-	let targetCenter = ((currentCoords[1]).toFixed(2), (currentCoords[0]).toFixed(2));
+	// let targetCenter = ((currentCoords[1]).toFixed(2), (currentCoords[0]).toFixed(2));
 	console.log('targetCenter is ' + (currentCoords[1]).toFixed(2), (currentCoords[0]).toFixed(2))
 	//when go button is clicked, setView to coordinates
 	setView(currentCoords[1], currentCoords[0]);
 
-	let center = earth.getCenter();
-	let centerLat = (center[0]).toFixed(2);
-	let centerLong = (center[1]).toFixed(2);
-	setViewCenter = (centerLat, centerLong);
-	console.log((centerLat));
+	if (currentIndex !== null) {
+		markers[currentIndex].closePopup();
+	} 
+	markers[coordArrayIndex].openPopup();
+	currentIndex = coordArrayIndex;
+	
+	
 
-	//if the setView matches the marker coordinates, tell renderMarkers
-	if ((centerLat == (currentCoords[1]).toFixed(2)) && centerLong == (currentCoords[0]).toFixed(2)) {
-		let centered = true;
-	}
+	// //if the setView matches the marker coordinates, tell renderMarkers
+	// if ((centerLat == (currentCoords[1]).toFixed(2)) && centerLong == (currentCoords[0]).toFixed(2)) {
+	// 	console.log('true!');
+	// 	let centered = true;
+	// }
 });
 
 //creates a side bar featuring details
@@ -274,3 +283,5 @@ displayNumberOfDays();
 //pull tweets from Twitter using coordinates and #earthquake
 
 	//Twitter API Key: 	S1heh865MzpqXkBaCF6lrbo7p
+
+	
