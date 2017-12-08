@@ -3,8 +3,8 @@
 var options = {
 	atmosphere: true, 
 	sky: true,
-	zoom: 0,
-	zooming: true
+	zoom: 2.53,
+	zooming:false
 };
 var earth = new WE.map('earth_div', options);
 markers =[];
@@ -225,7 +225,7 @@ function displayMinimumMagnitude() {
 	});
 }
 
-//News API ---------------------------------------------------------------------------------
+//News API -----------------------------------
 
 //grab JSON from NewsAPI
 const NEWS_URL = 'https://newsapi.org/v2/everything?q=earthquake'
@@ -233,12 +233,14 @@ function newsDataFromAPI() {
 	const query = {
 		from: submitDateToAPI(),
 		language: 'en',
+		// sources: 'abc-news, al-jazeera-english, associated-press, bbc-news, cbc-news, cnn, google-news, the-new-york-times, msnbc, nbc-news, news-com-au, politico, newsweek, reuters, usa-today, the-washington-post, national-geographic',
 		sortBy: 'relevency',
 		apiKey: '84025f0f2bdb42febe0bacbdc6c3391b'
 	}
 	$.getJSON(NEWS_URL, query, function(data) {
 		let newsJSON = JSON.stringify(data, null, 2);
-		console.log(newsJSON);
+		//pretty print JSON
+		// console.log(newsJSON);
 		for (i=0; i < data.articles.length; i++) {
 					let article = (data.articles[i]);
 					renderNews(article);
@@ -250,12 +252,18 @@ function newsDataFromAPI() {
 function renderNews(article) {
 	newsDivData = `
 	<div class='newsDiv'>
-	<p>${article.title}</p>
-	<p>${article.author}</p>
+	<a href=${article.url} target='_blank'><p style='font-size:15px; font-weight:700;'>${article.title}</p></a>
 	<p>${article.description}</p>
 	</div>
 	`
 	$('.right-top').append(newsDivData);
+}
+//--------------------------------------------
+
+//Twitter API --------------------------------
+const TWITTER_URL = 'https://stream.twitter.com/1.1/statuses/filter.json?track=earthquake';
+function twitterDataFromAPI() {
+
 }
 
 displayMinimumMagnitude();

@@ -48,13 +48,24 @@
   -webkit-appearance: none;
     appearance: none;
     width: 100%;
-    height: 25px;
-    background: #d3d3d3;
+    height: 10px;
+    background: #112F57;
     outline: none;
-    opacity: 0.7;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
+    opacity: 0.6;
+    -webkit-transition: .5s;
+    transition: opacity .5s;
 }
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: 1px solid #000000;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+  margin-top: -5px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  }
 
 .submit, .travelButton {
 	border: 0;
@@ -103,12 +114,11 @@ h3 {
 
 .left-section, .right-section {
 	height: 100vh;
-	width: 25%;
+	width: 23%;
 	background-color: rgba(223, 237, 255, 0.6);
 	margin: 0;
 	position: absolute;
 	top: 30px;
-	overflow-y: scroll;
 	font-size: 14px;
 }
 ::-webkit-scrollbar {
@@ -116,12 +126,8 @@ h3 {
 }
 ::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
 }
 ::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
     background: rgba(211, 85, 90, 0.8); 
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
@@ -130,12 +136,28 @@ h3 {
 }
 
 .left-section {
+	overflow-y: scroll;
+	overflow-x: hidden;
 	top: 0;
 	left: 0;
 }
 .right-section {
 	top:0;
 	right: 0;
+}
+.right-top {
+	height: 50vh;
+	overflow-y: scroll;
+	overflow-wrap: break-word;
+	padding: 10px;
+}
+.right-top p {
+	padding: 0;
+	margin: 0;
+}
+.right-top a {
+	text-decoration: none;
+	color: #112F57;
 }
 .totalEarthquakes {
 	padding: 0 10px;
@@ -147,4 +169,8 @@ h3 {
 .dataDiv {
 	 border-bottom: 1px solid black;
 	 padding: 10px;
+}
+.newsDiv {
+	padding-top: 20px;
+	background-color: 
 }
