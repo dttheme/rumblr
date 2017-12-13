@@ -8,9 +8,6 @@
   body {
   	overflow: hidden;
   }
-  header {
-  	position: inline;
-  }
   main {
   	position: relative;
   }
@@ -20,20 +17,19 @@
   	bottom: 0; 
   	left: 0;
   	height: 100vh;
-    background-color: #000; 
-	position: absolute;
-}
-.popupDiv {
-	font-family: 'Open Sans', sans-serif;
-
-}
-.popupDiv a {
-	text-decoration: none;
-	color: #112F57;
-}
-.popupDiv a:hover {
-	text-decoration: underline;
-}
+  	background-color: #000; 
+  	position: absolute;
+  }
+  .popupDiv {
+  	font-family: 'Open Sans', sans-serif;
+  }
+  .popupDiv a {
+  	text-decoration: none;
+  	color: #112F57;
+  }
+  .popupDiv a:hover {
+  	text-decoration: underline;
+  }
   .landing-page {
   	font-size: 17px;
   	font-weight: 700;
@@ -51,157 +47,202 @@
   	margin-top: 5%;
   }
   #slidecontainer {
-  	margin: 50px 0;
+  	margin: 50px 0 20px 0;
   	width: 100%;
   }
   .slider {
-  -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    height: 10px;
-    background: #112F57;
-    outline: none;
-    opacity: 0.6;
-    -webkit-transition: .5s;
-    transition: opacity .5s;
-}
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  border: 1px solid #000000;
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
-  background: #ffffff;
-  cursor: pointer;
-  margin-top: -5px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
-  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  	-webkit-appearance: none;
+  	appearance: none;
+  	width: 100%;
+  	height: 7px;
+  	background: #112F57;
+  	margin-bottom: 50px;
+  	outline: none;
+  	opacity: 0.6;
+  	-webkit-transition: all .5s;
+  	transition: opacity .5s;
+  }
+  .slider:focus {
+  	outline: none;
+  	box-shadow: inset 0px 0px 2px 1px red;
+  }
+  .slider::-webkit-slider-thumb {
+  	-webkit-appearance: none;
+  	border: 1px solid #000000;
+  	height: 30px;
+  	width: 30px;
+  	border-radius: 50%;
+  	background: #ffffff;
+  	cursor: pointer;
+  	margin-top: -6px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  	margin-left: -1px;
+  	box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
   }
 
-.submit, .travelButton {
-	border: 0;
-	border-radius: 5px;
-	font-family: 'Open Sans', sans-serif;
-	font-size: 15px;
-	font-weight: 700;
-		color: white;
-	background-color: #112F57;
-}
+  .submit, 
+  .travelButton, 
+  .searchAgainButton{
+  	border: none;
+  	border-radius: 5px;
+  	box-shadow: 3px 3px #585856;
+  	font-family: 'Open Sans', sans-serif;
+  	font-size: 15px;
+  	font-weight: 700;
+  	color: white;
+  	background-color: #112F57;
+  	-webkit-transition: background-color 0.30s ease-in-out;
+  	-moz-transition: background-color 0.30s ease-in-out;
+  	-ms-transition: background-color 0.30s ease-in-out;
+  	-o-transition: background-color 0.30s ease-in-out;
+  }
+  .submit:hover, 
+  .travelButton:hover, 
+  .searchAgainButton:hover {
+  	background-color: #0C213D;
+  	cursor: pointer;
+  }
+  .submit:focus, 
+  .travelButton:focus, 
+  .searchAgainButton:focus {
+  	background-color: #0C213D;
+  	outline: none;
+  	box-shadow: 0px 0px 4px red;
+  }
+  .submit:active, 
+  .travelButton:active, 
+  .searchAgainButton:active {
+  	background-color: #0C213D;
+  	box-shadow: 1px 1px #585856;
+  	transform: translateY(4px);
+  }
+  .searchAgainButton {
+  	padding: 3px 10px;
+  	margin: 3px 10px;
+  }
+  .submit {
+  	padding: 10px 60px;
+  }
+  .travelButton {
+  	padding: 3px 6px;
+  	float: right;
+  }
+  h1, h2 {
+  	color: white;
+  	font-size: 50px;
+  	font-weight: 900;
+  	font-family: 'Poppins', 'Open Sans', sans-serif;
+  	float: left;
+  	padding: 0 10px;
+  	margin: 0;
+  	display: inline;
+  }
+  h3, h4 {
+  	padding-left: 10px;
+  	padding-top: 20px;
+  	margin: 0;
+  }
+  h3  {
+  	font-size: 20px;
+  }
+  h4 {
+  	font-size: 23px;
+  	padding-bottom: 10px;
+  }	
 
-.submit {
-	padding: 10px 60px;
-}
+  .icon {
+  	float: left;
+  	color: #112F57;
+  }
+  .subheading {
+  	display: block;
+  	float: left;
+  	font-weight: 900;
+  	padding:0 10px;
+  	margin: 0;
+  	font-size: 12px;
+  }
 
-.travelButton {
-	padding: 3px 6px;
-	float: right;
-}
-.travelButton:hover {
-	cursor: pointer;
-}
+  .left-section, .right-section {
+  	height: 100vh;
+  	width: 23%;
+  	background-color: rgba(223, 237, 255, 0.5);
+  	margin: 0;
+  	position: absolute;
+  	top: 30px;
+  	font-size: 14px;
+  }
+  ::-webkit-scrollbar {
+  	width: 15px;
+  }
+  ::-webkit-scrollbar-track {
+  	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+  }
+  ::-webkit-scrollbar-thumb {
+  	background: rgba(211, 85, 90, 0.8); 
+  	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+  }
+  ::-webkit-scrollbar-thumb:window-inactive {
+  	background: rgba(255,0,0,0.4); 
+  }
 
-h1, h2 {
-	color: white;
-	font-size: 50px;
-	font-weight: 900;
-	font-family: 'Poppins', 'Open Sans', sans-serif;
-	float: left;
-	padding: 0 10px;
-	margin: 0;
-	display: inline;
-}
-h3, h4 {
-	font-size: 23px;
-	padding-left: 10px;
-	padding-top: 15px;
-	margin: 0;
-}
-h4 {
-	padding-bottom: 10px;
-}	
+  .left-section {
+  	top: 0;
+  	left: 0;
+  }
+  .earthquakeData {
+  	overflow-x: hidden;
+  	overflow-y: scroll;
+  	height: 60%;
+  }
+  .locationSpan {
+  	display: inline-block;
+  	width: 80%;
+  }
+  .right-section {
+  	top:0;
+  	right: 0;
+  }
+  .right-top {
+  	height: 85vh;
+  	overflow-y: scroll;
+  	overflow-wrap: break-word;
+  	padding: 10px;
+  	margin-bottom: 50px;
+  }
+  .right-top p {
+  	padding: 0;
+  	margin: 0;
+  }
+  .right-top a {
+  	text-decoration: none;
+  	color: #112F57;
+  }
+  .newsDiv a:focus {
+  	text-decoration: underline;
+  	outline-color:red;
+  }
+  .totalEarthquakes {
+  	padding: 0 10px;
+  }
 
-.icon {
-	float: left;
-	color: #112F57;
-}
-.subheading {
-	display: block;
-	float: left;
-	font-weight: 900;
-	padding:0 10px;
-	margin: 0;
-	font-size: 12px;
-}
-
-.left-section, .right-section {
-	height: 100vh;
-	width: 23%;
-	background-color: rgba(223, 237, 255, 0.5);
-	margin: 0;
-	position: absolute;
-	top: 30px;
-	font-size: 14px;
-}
-::-webkit-scrollbar {
-    width: 15px;
-}
-::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-}
-::-webkit-scrollbar-thumb {
-    background: rgba(211, 85, 90, 0.8); 
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
-}
-::-webkit-scrollbar-thumb:window-inactive {
-	background: rgba(255,0,0,0.4); 
-}
-
-.left-section {
-	top: 0;
-	left: 0;
-}
-.earthquakeData {
-	overflow-x: hidden;
-	overflow-y: scroll;
-	height: 100%;
-}
-.locationSpan {
-	display: inline-block;
-/*	padding-right: 10px;*/
-	width: 80%;
-}
-.right-section {
-	top:0;
-	right: 0;
-}
-.right-top {
-	height: 100vh;
-	overflow-y: scroll;
-	overflow-wrap: break-word;
-	padding: 10px;
-}
-.right-top p {
-	padding: 0;
-	margin: 0;
-}
-.right-top a {
-	text-decoration: none;
-	color: #112F57;
-}
-.totalEarthquakes {
-	padding: 0 10px;
-}
-  
-.hidden {
-	display: none;
-}
-.dataDiv {
-	font-size: 13px;
-	font-weight: 900;
-	height: 50px;
-	border-bottom: 1px solid black;
-	padding: 10px;
-}
-.newsDiv {
-	padding-top: 20px;
-	background-color: 
-}
+  .hidden {
+  	display: none;
+  }
+  .dataDiv {
+  	font-size: 13px;
+  	font-weight: 900;
+  	height: 50px;
+  	border-bottom: 1px solid black;
+  	padding: 10px;
+  }
+  .newsDiv {
+  	padding-top: 20px;
+  	background-color: 
+  }
+  .searchAgainDiv {
+  	height: auto;
+  	margin-bottom: 7px;
+  	position: fixed;
+  	bottom: 1%;
+  	left: 5%;
+  }

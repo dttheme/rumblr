@@ -8,6 +8,7 @@ var options = {
 };
 var earth = new WE.map('earth_div', options);
 let markers = [];
+let marker;
 let currentIndex = null;
 let stop = false;
 let coordArray = [];
@@ -22,7 +23,32 @@ $('.js-submit-button').click(function(event) {
 	revealEarth();
 	earthquakeDataFromAPI();
 	newsDataFromAPI();
+	$('.left-section').prop('hidden', false);
+	$('.right-section').prop('hidden', false);
 });
+
+//when new search button is clicked, show slider input
+$('.searchAgainButton').on('click', function() {
+	clearResults();
+	newSearch();
+	// removeMarker();
+	//when the new search button is clicked, remove the new search button and clear the markers from earth
+	//display scaling inputs where data was previously shown
+	//take current value of input and display it on screen
+	//when the submit button is clicked, take input value and pass them to API functions
+})
+
+function newSearch() {
+	$('.left-section').addClass('hidden');
+	$('.right-section').addClass('hidden');
+	$('.landing-page').removeClass('hidden');
+}
+//clear all dynamically generated data
+function clearResults() {
+	$('.totalEarthquakes').empty();
+	$('.earthquakeData').empty();
+	$('.right-top').empty();
+}
 
 //counts backwards to find past day
 function findDateInPast(date, days) {
@@ -46,7 +72,6 @@ function submitDateToAPI() {
 	let numberOfDaysSelected = $('#myRange').val();
 	let dateInPast = (findDateInPast(today, numberOfDaysSelected));
 	let startTimeURLString = createDateForURL(dateInPast);
-	console.log('startTimeURLString: ' + startTimeURLString);
 	return	startTimeURLString;
 }
 
@@ -94,8 +119,6 @@ function initialize() {
 //pulls data from the USGS API using input parameters
 const USGS_EARTHQUAKE_URL = 'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson';
 function earthquakeDataFromAPI() {
-	console.log('submitDateToApi output: ' + submitDateToAPI());
-	// console.log($('#magnitudeRange').val());
 	minMag = $('#magnitudeRange').val();
 	const query = {
 		starttime: submitDateToAPI(),
@@ -144,8 +167,8 @@ function setView(lat, long) {
 //give a count of the total earthquakes on the sidebar
 function renderTotalEarthquakes(data) {
 	let dayNumber = $('#myRange').val()
-	$('.totalEarthquakes').html(
-		`<p style='font-size:17px; font-weight: 900;'>There have been ${data.metadata.count} earthquakes in the last ${dayNumber} day(s) that match your search.</p>`
+	$('.totalEarthquakes').append(
+		`<p style='font-size:15px; font-weight: 900;'>There have been ${data.metadata.count} earthquakes in the last ${dayNumber} day(s) that match your search.</p>`
 		)
 }
 
@@ -155,11 +178,10 @@ $('.earthquakeData').on('click', '.travelButton', function(event) {
 	let coordIDCutString = coordIDString.slice(2);
 	let coordArrayIndex = parseInt(coordIDCutString);
 	let currentCoords = coordArray[coordArrayIndex];
-	// let targetCenter = ((currentCoords[1]).toFixed(2), (currentCoords[0]).toFixed(2));
-	console.log('targetCenter is ' + (currentCoords[1]).toFixed(2), (currentCoords[0]).toFixed(2))
+	console.log('targetCenter is ' + (currentCoords[1]).toFixed(2), (currentCoords[0]).toFixed(2));
+
 	//when go button is clicked, setView to coordinates
 	setView(currentCoords[1], currentCoords[0]);
-
 
 	//turn into its own function, call where needed
 	if (currentIndex !== null) {
@@ -213,7 +235,7 @@ function newsDataFromAPI() {
 	$.getJSON(NEWS_URL, query, function(data) {
 		let newsJSON = JSON.stringify(data, null, 2);
 		//pretty print JSON
-		console.log(newsJSON);
+		// console.log(newsJSON);
 		for (i=0; i < data.articles.length; i++) {
 					let article = (data.articles[i]);
 					renderNews(article);
@@ -233,11 +255,6 @@ function renderNews(article) {
 }
 //--------------------------------------------
 
-//Twitter API --------------------------------
-const TWITTER_URL = 'https://stream.twitter.com/1.1/statuses/filter.json?track=earthquake';
-function twitterDataFromAPI() {
-
-}
 
 displayMinimumMagnitude();
 displayNumberOfDays();
