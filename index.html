@@ -1,14 +1,16 @@
 	<!DOCTYPE HTML>
-	<html>
+	<html lang="en">
 	<head>
+		<meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width">
+	    <title>Rumblr | Earthquake tracking and information sharing</title>
 		<script src="https://use.fontawesome.com/7f641b72ff.js"></script>
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans|Poppins:400,900i" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href='styles.css'>
-		<title>Earthquake Tracking</title>
+		
 	</head>
 	<body>
-		<header></header>
-		<main>
+		<main roll='main'>
 		<div class="landing-page">
 			<h1>Rumblr</h1><i class="fa fa-exchange fa-4x icon" aria-hidden="true"></i><br><br>
 			<p class="subheading">Earthquake tracking and information sharing</p><br><br>
@@ -23,17 +25,18 @@
 			<div id="earth_div"></div>
 			<section class='left-section hidden'>
 				<h2>Rumblr</h2><i class="fa fa-exchange fa-4x icon" aria-hidden="true"></i><br><br><br>
+				<p class="subheading">Earthquake tracking and information sharing</p><br><br>
 				<h3>Results</h3>
-				<div class='totalEarthquakes'></div>
-				<div class="earthquakeData"></div>
+				<div class='totalEarthquakes' aria-live='assertive'></div>
+				<div class="earthquakeData" aria-live='assertive'></div>
 			</section>
 			<section class='right-section hidden'>
-				<div class="right-top">
-					<h4>News</h4>
+			<h4>Earthquake News</h4>
+				<div class="right-top" aria-live='assertive'>
 				</div>
-				<div class="right-bottom">
+				<!-- <div class="right-bottom">
 					<h5>Twitter</h5>
-				</div>
+				</div> -->
 			</section>
 			
 		</main>

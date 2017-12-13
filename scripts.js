@@ -77,7 +77,7 @@ $('#earth_div').click(function() {
 	stop = true;
 	setTimeout(function() {
 		stop = false;
-		animation(0.1);
+		 animation(0.1);
 	}, 2);
 });
 
@@ -124,38 +124,18 @@ function renderMarker(feature) {
 	humanDate = new Date(epochDate);
 	var marker = WE.marker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], 'pin.png', 32, 32).addTo(earth);
 	markers.push(marker);
-	marker.bindPopup(`<p>
+	marker.bindPopup(`
+		<div class='popupDiv'>
+		<p>
 		<b>Location:</b> ${feature.properties.place} <br>
 		<b>Date:</b> ${humanDate} <br>
 		<b>Magnitude:</b> ${feature.properties.mag} <br>
-		<!--Coordinates: ${feature.geometry.coordinates[1], feature.geometry.coordinates[0]}-->
-		</p>`)
-	
+		<b>Depth:</b> ${feature.geometry.coordinates[2]} miles<br>
+		<b>Coordinates:</b> ${feature.geometry.coordinates[1]}, ${feature.geometry.coordinates[0]}<br>
+		<a href =${feature.properties.url} target='_blank'>Visit the USGS Page</a>
+		</p>
+		</div>`)
 }
-
-
-// function renderMarker({ 
-// 	var marker = markers[markerID];
-// 	 marker.openPopup(); 
-// 	}
-
-// function findCurrentCenterOpenPopup() {
-// 	center = earth.getCenter();
-// 	centerLat = (center[0]).toFixed(2);
-// 	centerLong = (center[1]).toFixed(2);
-// 	console.log(centerLat, centerLong)
-	
-// }
-// findCurrentCenterOpenPopup();
-
-
-// //button pans map to earthquake coords
-// function parseCoordArray(coords) {
-	
-// 	console.log((currentCoords[1]).toFixed(2));
-// 	console.log((currentCoords[0]).toFixed(2));
-	
-// }
 
 function setView(lat, long) {
 	earth.setView([lat, long])
@@ -180,45 +160,29 @@ $('.earthquakeData').on('click', '.travelButton', function(event) {
 	//when go button is clicked, setView to coordinates
 	setView(currentCoords[1], currentCoords[0]);
 
+
+	//turn into its own function, call where needed
 	if (currentIndex !== null) {
 		markers[currentIndex].closePopup();
 	} 
 	markers[coordArrayIndex].openPopup();
 	currentIndex = coordArrayIndex;
 	
-	
-
-	// //if the setView matches the marker coordinates, tell renderMarkers
-	// if ((centerLat == (currentCoords[1]).toFixed(2)) && centerLong == (currentCoords[0]).toFixed(2)) {
-	// 	console.log('true!');
-	// 	let centered = true;
-	// }
 });
+
+// $('we-pp-wrapper')
 
 //creates a side bar featuring details
 function renderEarthquake(feature, i) {
 	let buttonIdentifier = 'tb' + i;
 	earthquakeDataHTML = 
 	`<div class='dataDiv'>
-	<p>
-	<b>Location:</b> ${feature.properties.place} <br>
-	<b>Date:</b> ${humanDate} <br>
-	<b>Magnitude:</b> ${feature.properties.mag} <br>
-	</p>
-	<button class='travelButton' data-coordinate-id=${buttonIdentifier}>Go!</button>
+	<span class='locationSpan'>${feature.properties.title}</span>&nbsp&nbsp<button class='travelButton' data-coordinate-id=${buttonIdentifier} title='Travel to earthquake location'><i class="fa fa-bullseye"></i></button>
 	</div>
 	`;
-	infoUnavailable = `
-	<div class='infoUnavailable'>
-	<p>Sorry, there are no earthquakes that match your search.</p>
-	</div>
-	`
 	if (feature != undefined) {
 		$('.earthquakeData').append(earthquakeDataHTML)
-	} else {
-		$('.earthquakeDataDiv').append(infoUnavailable);
 	}
-	
 	//make bar slide into the margins
 }
 
@@ -242,14 +206,14 @@ function newsDataFromAPI() {
 	const query = {
 		from: submitDateToAPI(),
 		language: 'en',
-		// sources: 'abc-news, al-jazeera-english, associated-press, bbc-news, cbc-news, cnn, google-news, the-new-york-times, msnbc, nbc-news, news-com-au, politico, newsweek, reuters, usa-today, the-washington-post, national-geographic',
+		sources: 'associated-press, bbc-news, cbc-news, cnn, the-new-york-times, msnbc, nbc-news, news-com-au, newsweek, usa-today, the-washington-post, national-geographic',
 		sortBy: 'relevency',
 		apiKey: '84025f0f2bdb42febe0bacbdc6c3391b'
 	}
 	$.getJSON(NEWS_URL, query, function(data) {
 		let newsJSON = JSON.stringify(data, null, 2);
 		//pretty print JSON
-		// console.log(newsJSON);
+		console.log(newsJSON);
 		for (i=0; i < data.articles.length; i++) {
 					let article = (data.articles[i]);
 					renderNews(article);

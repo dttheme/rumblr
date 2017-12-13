@@ -20,9 +20,19 @@
   	bottom: 0; 
   	left: 0;
   	height: 100vh;
-/*  	width: 100vh;*/
     background-color: #000; 
 	position: absolute;
+}
+.popupDiv {
+	font-family: 'Open Sans', sans-serif;
+
+}
+.popupDiv a {
+	text-decoration: none;
+	color: #112F57;
+}
+.popupDiv a:hover {
+	text-decoration: underline;
 }
   .landing-page {
   	font-size: 17px;
@@ -82,8 +92,13 @@
 }
 
 .travelButton {
-	padding: 3px 60px;
+	padding: 3px 6px;
+	float: right;
 }
+.travelButton:hover {
+	cursor: pointer;
+}
+
 h1, h2 {
 	color: white;
 	font-size: 50px;
@@ -94,10 +109,15 @@ h1, h2 {
 	margin: 0;
 	display: inline;
 }
-h3 {
+h3, h4 {
 	font-size: 23px;
 	padding-left: 10px;
+	padding-top: 15px;
+	margin: 0;
 }
+h4 {
+	padding-bottom: 10px;
+}	
 
 .icon {
 	float: left;
@@ -107,9 +127,9 @@ h3 {
 	display: block;
 	float: left;
 	font-weight: 900;
-	padding: 5px 10px;
+	padding:0 10px;
 	margin: 0;
-	font-size: 14px;
+	font-size: 12px;
 }
 
 .left-section, .right-section {
@@ -136,17 +156,25 @@ h3 {
 }
 
 .left-section {
-	overflow-y: scroll;
-	overflow-x: hidden;
 	top: 0;
 	left: 0;
+}
+.earthquakeData {
+	overflow-x: hidden;
+	overflow-y: scroll;
+	height: 100%;
+}
+.locationSpan {
+	display: inline-block;
+/*	padding-right: 10px;*/
+	width: 80%;
 }
 .right-section {
 	top:0;
 	right: 0;
 }
 .right-top {
-	height: 50vh;
+	height: 100vh;
 	overflow-y: scroll;
 	overflow-wrap: break-word;
 	padding: 10px;
@@ -167,8 +195,11 @@ h3 {
 	display: none;
 }
 .dataDiv {
-	 border-bottom: 1px solid black;
-	 padding: 10px;
+	font-size: 13px;
+	font-weight: 900;
+	height: 50px;
+	border-bottom: 1px solid black;
+	padding: 10px;
 }
 .newsDiv {
 	padding-top: 20px;
