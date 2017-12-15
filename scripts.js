@@ -8,7 +8,6 @@ var options = {
 };
 var earth = new WE.map('earth_div', options);
 let markers = [];
-let marker;
 let currentIndex = null;
 let stop = false;
 let coordArray = [];
@@ -20,6 +19,8 @@ $(document).ready(function() {
 
 //when the submit button is clicked, remove the prompt and send the input to the API
 $('.js-submit-button').click(function(event) {	
+	event.preventDefault();
+	$('.searchAgainDiv').removeClass('hidden');
 	revealEarth();
 	earthquakeDataFromAPI();
 	newsDataFromAPI();
@@ -30,24 +31,33 @@ $('.js-submit-button').click(function(event) {
 //when new search button is clicked, show slider input
 $('.searchAgainButton').on('click', function() {
 	clearResults();
-	newSearch();
+	newSearchForm();
 	// removeMarker();
 	//when the new search button is clicked, remove the new search button and clear the markers from earth
-	//display scaling inputs where data was previously shown
-	//take current value of input and display it on screen
-	//when the submit button is clicked, take input value and pass them to API functions
 })
 
-function newSearch() {
-	$('.left-section').addClass('hidden');
-	$('.right-section').addClass('hidden');
-	$('.landing-page').removeClass('hidden');
+//when the new search form is submitted, display new results
+$('.submitNewSearch').on('click', function(event) {
+	earthquakeDataFromAPI();
+	newsDataFromAPI();
+	$('.earthquakeData').empty();
+	$('.searchAgainDiv').removeClass('hidden');
+})
+
+//append a new search form to the left element
+function newSearchForm() {
+	$('.earthquakeData').append($('#dateAndMagForm'));
+	$('#dateAndMagForm').css({'padding':'20px', 'font-size': '17px', 'font-weight': '900'})
+	$('.js-submit-button').addClass('hidden');
+	$('.submitNewSearch').removeClass('hidden');
 }
+
 //clear all dynamically generated data
 function clearResults() {
 	$('.totalEarthquakes').empty();
 	$('.earthquakeData').empty();
 	$('.right-top').empty();
+	$('.searchAgainDiv').addClass('hidden');
 }
 
 //counts backwards to find past day
@@ -75,7 +85,7 @@ function submitDateToAPI() {
 	return	startTimeURLString;
 }
 
-//when the user submits, the landing page will disappear and the earth will be rendered
+//when the user submits, the landing page will disappear and the sidebars will be rendered
 function revealEarth() {
 	$('.landing-page').addClass('hidden');
 	$('.left-section').removeClass('hidden');
@@ -259,10 +269,11 @@ function renderNews(article) {
 displayMinimumMagnitude();
 displayNumberOfDays();
 
-//pull data from USGS; coordinates, name, time/date, magnitude
-
-//pull tweets from Twitter using coordinates and #earthquake
-
-	//Twitter API Key: 	S1heh865MzpqXkBaCF6lrbo7p
+//JS to do 
+//remove markers when new search
+//provide new inputs
+//when user submits, return api data
+//
+//
 
 	
