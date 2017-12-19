@@ -178,7 +178,7 @@ function setView(lat, long) {
 function renderTotalEarthquakes(data) {
 	let dayNumber = $('#myRange').val()
 	$('.totalEarthquakes').append(
-		`<p style='font-size:15px; font-weight: 900;'>There have been ${data.metadata.count} earthquakes in the last ${dayNumber} day(s) that match your search.</p>`
+		`<p style='font-weight: 900;'>There have been ${data.metadata.count} earthquakes in the last ${dayNumber} day(s) that match your search.</p>`
 		)
 }
 
@@ -209,7 +209,7 @@ function renderEarthquake(feature, i) {
 	let buttonIdentifier = 'tb' + i;
 	earthquakeDataHTML = 
 	`<div class='dataDiv'>
-	<span class='locationSpan'>${feature.properties.title}</span>&nbsp&nbsp<button class='travelButton' data-coordinate-id=${buttonIdentifier} title='Travel to earthquake location'><i class="fa fa-bullseye"></i></button>
+	<span class='locationSpan'>${feature.properties.title}</span>&nbsp&nbsp<button class='travelButton' data-coordinate-id=${buttonIdentifier} title='Travel to earthquake location'><i class="fa fa-bullseye bullseye"></i></button>
 	</div>
 	`;
 	if (feature != undefined) {

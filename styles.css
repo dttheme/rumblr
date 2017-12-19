@@ -34,7 +34,7 @@
   	font-size: 17px;
   	font-weight: 700;
   	width: 340px;
-  	height: 75vh;
+  	height: auto;
   	margin: 20px;
   	background-color: rgba(223, 237, 255, 0.6);
   	border-radius: 5px;
@@ -124,6 +124,7 @@
   }
   .travelButton {
   	padding: 3px 6px;
+  	position: relative;
   	float: right;
   }
   h1, h2 {
@@ -153,13 +154,17 @@
   	float: left;
   	color: #112F57;
   }
+  .icon-inside {
+  	float: left;
+  	color:  #112F57;
+  }
   .subheading {
   	display: block;
   	float: left;
   	font-weight: 900;
   	padding:0 10px;
   	margin: 0;
-  	font-size: 12px;
+  	font-size: 10px;
   }
 
   .left-section, .right-section {
@@ -222,6 +227,7 @@
   	outline-color:red;
   }
   .totalEarthquakes {
+  	font-size: 14px;
   	padding: 0 10px;
   }
 
@@ -246,6 +252,74 @@
   	bottom: 1%;
   	left: 5%;
   }
-  /*CSS to do
-  + media inquires for the following views:;
-   */
+
+@media only screen and (max-width: 1200px) {
+	h2  {
+		font-size: 6vmin;
+	}
+	.icon-inside {
+		font-size: 7vmin;
+	}
+}
+
+@media only screen and (max-width: 1000px) {
+	h1 {
+		font-size: 7vmin;
+	}
+	.icon {
+		font-size: 8vmin;
+	}
+	h2  {
+		font-size: 5vmin;
+	}
+	.icon-inside {
+		font-size: 6vmin;
+	}
+	h3 {
+		font-size: 2vw;
+	}
+	.totalEarthquakes {
+		font-size: 2vh;
+	}
+	.earthquakeData {
+		height: 55vh;
+		font-size: 2vh;
+	}
+	.dataDiv {
+		height: auto;
+		overflow-wrap: break-word;
+	}
+	.landing-page {
+		font-size: 2vmin;
+	}
+}
+
+@media only screen and (max-width: 700px) {
+	#earth_div {
+		width: 100%;
+	}
+	h1 {
+		font-size: 5vmin;
+	} 
+	.icon {
+		font-size: 6vmin;
+	}
+	h2 {
+		font-size: 4vw;
+	}
+	.icon-inside {
+		font-size: 4vw;
+	}
+	h4 {
+		font-size: 2vw;
+	}
+	.slider::-webkit-slider-thumb {
+	 	height: 20px;
+	 	width: 20px;
+	 }
+	 .searchAgainDiv {
+	 	left: 2%;
+	 }
+
+
+}
