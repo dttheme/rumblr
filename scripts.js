@@ -257,7 +257,7 @@ function newsDataFromAPI() {
 function renderNews(article) {
 	newsDivData = `
 	<div class='newsDiv'>
-	<a href=${article.url} target='_blank'><p style='font-size:15px; font-weight:700;'>${article.title}</p></a>
+	<a href=${article.url} target='_blank'><p style='font-weight:700;'>${article.title}</p></a>
 	<p>${article.description}</p>
 	</div>
 	`

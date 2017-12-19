@@ -125,6 +125,7 @@
   .travelButton {
   	padding: 3px 6px;
   	position: relative;
+  	display: inline-block;
   	float: right;
   }
   h1, h2 {
@@ -197,7 +198,7 @@
   .earthquakeData {
   	overflow-x: hidden;
   	overflow-y: scroll;
-  	height: 60%;
+  	height: 45vh;
   }
   .locationSpan {
   	display: inline-block;
@@ -237,13 +238,12 @@
   .dataDiv {
   	font-size: 13px;
   	font-weight: 900;
-  	height: 50px;
+  	height: 15%;
   	border-bottom: 1px solid black;
   	padding: 10px;
   }
   .newsDiv {
   	padding-top: 20px;
-  	background-color: 
   }
   .searchAgainDiv {
   	height: auto;
@@ -260,9 +260,13 @@
 	.icon-inside {
 		font-size: 7vmin;
 	}
+	.earthquakeData {
+		height: 55vh;
+		font-size: 2vh;
+	}
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 992px) {
 	h1 {
 		font-size: 7vmin;
 	}
@@ -294,10 +298,7 @@
 	}
 }
 
-@media only screen and (max-width: 700px) {
-	#earth_div {
-		width: 100%;
-	}
+@media only screen and (max-width: 768px) {
 	h1 {
 		font-size: 5vmin;
 	} 
@@ -313,6 +314,16 @@
 	h4 {
 		font-size: 2vw;
 	}
+	.right-top {
+		font-size: 11px;
+	}
+	.right-top a {
+		font-size: 11px !important;
+	}
+	.locationSpan {
+		font-size: 11px;
+		width: 60%;
+	}
 	.slider::-webkit-slider-thumb {
 	 	height: 20px;
 	 	width: 20px;
@@ -320,6 +331,12 @@
 	 .searchAgainDiv {
 	 	left: 2%;
 	 }
+}
 
-
+@media only screen and (max-width: 480px) {
+	.landing-page {
+		top: 20%;
+		left: 15%;
+		width: 50%;
+	}
 }
