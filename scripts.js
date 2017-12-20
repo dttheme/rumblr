@@ -32,6 +32,7 @@ $('.js-submit-button').click(function(event) {
 $('.searchAgainButton').on('click', function() {
 	clearResults();
 	newSearchForm();
+	initialize();
 	// removeMarker();
 	//when the new search button is clicked, remove the new search button and clear the markers from earth
 })
