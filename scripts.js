@@ -30,10 +30,12 @@ $('.js-submit-button').click(function(event) {
 
 //when new search button is clicked, show slider input
 $('.searchAgainButton').on('click', function() {
-	clearResults();
-	newSearchForm();
-	initialize();
-	// removeMarker();
+	
+	// clearResults();
+	// newSearchForm();
+	// markers = [];
+	// $('#myRange').val(0);
+	// earthquakeDataFromAPI();
 	//when the new search button is clicked, remove the new search button and clear the markers from earth
 })
 
@@ -63,6 +65,8 @@ function clearResults() {
 
 //counts backwards to find past day
 function findDateInPast(date, days) {
+	console.log(date);
+	console.log(days);
 	return new Date(
 		date.getFullYear(),
 		date.getMonth(),
@@ -83,6 +87,7 @@ function submitDateToAPI() {
 	let numberOfDaysSelected = $('#myRange').val();
 	let dateInPast = (findDateInPast(today, numberOfDaysSelected));
 	let startTimeURLString = createDateForURL(dateInPast);
+	console.log(startTimeURLString);
 	return	startTimeURLString;
 }
 
@@ -131,8 +136,13 @@ function initialize() {
 const USGS_EARTHQUAKE_URL = 'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson';
 function earthquakeDataFromAPI() {
 	minMag = $('#magnitudeRange').val();
+	today = new Date();
+	console.log(today);
+	let todayDate = createDateForURL(today);
+	console.log(todayDate);
 	const query = {
 		starttime: submitDateToAPI(),
+		endtime: todayDate,
 		minmagnitude: minMag
 	};
 	$.getJSON(USGS_EARTHQUAKE_URL, query, function(data){
@@ -178,7 +188,7 @@ function setView(lat, long) {
 //give a count of the total earthquakes on the sidebar
 function renderTotalEarthquakes(data) {
 	let dayNumber = $('#myRange').val()
-	$('.totalEarthquakes').append(
+	$('.totalEarthquakes').html(
 		`<p style='font-weight: 900;'>There have been ${data.metadata.count} earthquakes in the last ${dayNumber} day(s) that match your search.</p>`
 		)
 }
