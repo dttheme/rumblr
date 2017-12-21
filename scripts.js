@@ -3,7 +3,7 @@
 var options = {
 	atmosphere: true, 
 	sky: true,
-	zoom: 2.53,
+	zoom: 2,
 	zooming:false
 };
 var earth = new WE.map('earth_div', options);
@@ -28,16 +28,16 @@ $('.js-submit-button').click(function(event) {
 	$('.right-section').prop('hidden', false);
 });
 
-//when new search button is clicked, show slider input
-$('.searchAgainButton').on('click', function() {
-	
-	// clearResults();
-	// newSearchForm();
-	// markers = [];
-	// $('#myRange').val(0);
-	// earthquakeDataFromAPI();
-	//when the new search button is clicked, remove the new search button and clear the markers from earth
-})
+// //when new search button is clicked, show slider input
+// $('.searchAgainButton').on('click', function() {
+
+// 	// clearResults();
+// 	// newSearchForm();
+// 	// markers = [];
+// 	// $('#myRange').val(0);
+// 	// earthquakeDataFromAPI();
+// 	//when the new search button is clicked, remove the new search button and clear the markers from earth
+// })
 
 //when the new search form is submitted, display new results
 $('.submitNewSearch').on('click', function(event) {
@@ -137,9 +137,7 @@ const USGS_EARTHQUAKE_URL = 'https://earthquake.usgs.gov/fdsnws/event/1/query?fo
 function earthquakeDataFromAPI() {
 	minMag = $('#magnitudeRange').val();
 	today = new Date();
-	console.log(today);
 	let todayDate = createDateForURL(today);
-	console.log(todayDate);
 	const query = {
 		starttime: submitDateToAPI(),
 		endtime: todayDate,

@@ -116,6 +116,7 @@
   	transform: translateY(4px);
   }
   .searchAgainButton {
+  	text-decoration: none;
   	padding: 3px 10px;
   	margin: 3px 10px;
   }
@@ -139,6 +140,7 @@
   	display: inline;
   }
   h3, h4 {
+  	font-family: 'Poppins', 'Open Sans', sans-serif;
   	padding-left: 10px;
   	padding-top: 20px;
   	margin: 0;
@@ -198,7 +200,7 @@
   .earthquakeData {
   	overflow-x: hidden;
   	overflow-y: scroll;
-  	height: 45vh;
+  	height: 55vh;
   }
   .locationSpan {
   	display: inline-block;
@@ -209,11 +211,10 @@
   	right: 0;
   }
   .right-top {
-  	height: 85vh;
+  	height: 70%;
   	overflow-y: scroll;
   	overflow-wrap: break-word;
   	padding: 10px;
-  	margin-bottom: 50px;
   }
   .right-top p {
   	padding: 0;
@@ -223,6 +224,9 @@
   	text-decoration: none;
   	color: #112F57;
   }
+.right-footer {
+	height: auto;
+}
   .newsDiv a:focus {
   	text-decoration: underline;
   	outline-color:red;
@@ -231,7 +235,6 @@
   	font-size: 14px;
   	padding: 0 10px;
   }
-
   .hidden {
   	display: none;
   }
@@ -274,19 +277,15 @@
 		font-size: 8vmin;
 	}
 	h2  {
-		font-size: 3vmin;
+		font-size: 5vmin;
 	}
 	.icon-inside {
-		font-size: 3vmin;
+		font-size: 5vmin;
 	}
 	h3 {
 		font-size: 2vw;
 	}
 	.totalEarthquakes {
-		font-size: 2vh;
-	}
-	.earthquakeData {
-		height: 55vh;
 		font-size: 2vh;
 	}
 	.dataDiv {
@@ -350,11 +349,12 @@
 		width: 100%;
 	}
 	.subheading {
+		font-size: 2vh;
 		float: right;
 		top:0;
 	}
 	h3 {
-		2vh;
+		font-size: 2vh;
 	}
 	.earthquakeData {
 		height: 10vh;
