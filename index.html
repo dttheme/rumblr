@@ -20,7 +20,9 @@
 	  				<input type="range" min="1" max="30" value="1" class="slider" id="myRange">
 	  				<label for='magnitudeRange'>I would like to see earthquakes with a magnitude of <span id='minimumMagnitude'>1</span> and above.</label>
 	  				<input type="range" min="1" max="10" value="1" step='0.5' class="slider" id="magnitudeRange">
-	  				<button type="submit" role='button' class='js-submit-button submit'>Submit</button>
+	  				<button type="submit" role='button' class='js-submit-button submit'>
+	  				<span>Submit </span>
+	  				</button>
 <!-- 	  				<a href='./index.html' class='submitNewSearch submit hidden'>Submit</button> -->
   			</form>
 			</div>
@@ -34,15 +36,17 @@
 				<div class='totalEarthquakes' aria-live='assertive'>
 				</div>
 				<div class="earthquakeData" aria-live='assertive'></div>
-				<div class='searchAgainDiv'><a href='./index.html' role='button' class="searchAgainButton">New Search</a></div>
+				<div class='searchAgainDiv'>
+				<a href='./index.html' role='button' class="searchAgainButton">New Search
+				</a></div>
 			</section>
 			<section class='right-section hidden' hidden>
 			<h4>Earthquake News</h4>
 				<div class="right-top" aria-live='assertive'>
 				</div>
 				<div class='right-footer'>
-				<i class='fa fa-github-alt fa-lg' role='button'></i>
-				<i class='fa fa-linkedin-square fa-lg' role='button'></i>
+				<a href='https://github.com/dttheme'><i class='fa fa-github-square fa-lg socialbutton' role='button' href='https://github.com/dttheme' title='GitHub'></i></a>
+				<a href='https://www.linkedin.com/in/dyanna-turner-55a95b6b/'><i class='fa fa-linkedin-square fa-lg socialbutton' role='button' title='LinkedIn'></i></a>
 				</div>
 				<!-- <div class="right-bottom">
 					<h5>Twitter</h5>

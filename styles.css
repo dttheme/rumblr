@@ -90,6 +90,7 @@
   	font-weight: 700;
   	color: white;
   	background-color: #112F57;
+  	transition: all 0.5s;
   	-webkit-transition: background-color 0.30s ease-in-out;
   	-moz-transition: background-color 0.30s ease-in-out;
   	-ms-transition: background-color 0.30s ease-in-out;
@@ -123,6 +124,27 @@
   .submit {
   	padding: 10px 60px;
   }
+  .submit span {
+  	cursor: pointer;
+  	display: inline-block;
+  	position: relative;
+  	transition: 0.5s;
+  }
+  .submit span:after{
+  	content: '\f101';
+  	position: absolute;
+	  opacity: 0;
+	  top: 0;
+	  right: -20px;
+	  transition: 0.5s;
+	}
+.submit:hover span {
+	padding-right: 25px;
+}
+.submit:hover span:after {
+	opacity: 1;
+	right: 0;
+}
   .travelButton {
   	padding: 3px 6px;
   	position: relative;
@@ -211,7 +233,7 @@
   	right: 0;
   }
   .right-top {
-  	height: 70%;
+  	height: 80%;
   	overflow-y: scroll;
   	overflow-wrap: break-word;
   	padding: 10px;
@@ -225,7 +247,22 @@
   	color: #112F57;
   }
 .right-footer {
+	float: right;
 	height: auto;
+}
+.socialbutton {
+	color: white;
+	height:20px;
+	width: auto;
+	bottom: 2px;
+	transition: all 0.3s;
+}
+.socialbutton:hover {
+	color: #112F57;
+}
+.socialbutton:focus {
+	outline: none;
+  	box-shadow: 0px 0px 4px red;
 }
   .newsDiv a:focus {
   	text-decoration: underline;
@@ -250,9 +287,8 @@
   }
   .searchAgainDiv {
   	height: auto;
-  	margin-bottom: 7px;
   	position: fixed;
-  	bottom: 1%;
+  	bottom: 3%;
   	left: 5%;
   }
 
