@@ -13,9 +13,9 @@ let stop = false;
 let coordArray = [];
 //------------------------------------------------
 //when the document is ready, create the globe
-$(document).ready(function() {
-	initialize();
-})
+$(initialize());
+console.log(window);
+
 
 //when the submit button is clicked, remove the prompt and send the input to the API
 $('.js-submit-button').click(function(event) {	
@@ -28,45 +28,14 @@ $('.js-submit-button').click(function(event) {
 	$('.right-section').prop('hidden', false);
 });
 
-// //when new search button is clicked, show slider input
-// $('.searchAgainButton').on('click', function() {
-
-// 	// clearResults();
-// 	// newSearchForm();
-// 	// markers = [];
-// 	// $('#myRange').val(0);
-// 	// earthquakeDataFromAPI();
-// 	//when the new search button is clicked, remove the new search button and clear the markers from earth
-// })
-
 //when the new search form is submitted, display new results
 $('.submitNewSearch').on('click', function(event) {
-	earthquakeDataFromAPI();
-	newsDataFromAPI();
 	$('.earthquakeData').empty();
 	$('.searchAgainDiv').removeClass('hidden');
 })
 
-//append a new search form to the left element
-function newSearchForm() {
-	$('.earthquakeData').append($('#dateAndMagForm'));
-	$('#dateAndMagForm').css({'padding':'20px', 'font-size': '17px', 'font-weight': '900'})
-	$('.js-submit-button').addClass('hidden');
-	$('.submitNewSearch').removeClass('hidden');
-}
-
-//clear all dynamically generated data
-function clearResults() {
-	$('.totalEarthquakes').empty();
-	$('.earthquakeData').empty();
-	$('.right-top').empty();
-	$('.searchAgainDiv').addClass('hidden');
-}
-
 //counts backwards to find past day
 function findDateInPast(date, days) {
-	console.log(date);
-	console.log(days);
 	return new Date(
 		date.getFullYear(),
 		date.getMonth(),
@@ -87,7 +56,6 @@ function submitDateToAPI() {
 	let numberOfDaysSelected = $('#myRange').val();
 	let dateInPast = (findDateInPast(today, numberOfDaysSelected));
 	let startTimeURLString = createDateForURL(dateInPast);
-	console.log(startTimeURLString);
 	return	startTimeURLString;
 }
 
@@ -114,11 +82,12 @@ function animateEarth(vel) {
 	});
 }
 
+//research how to stop earth animation
 $('#earth_div').click(function() {
 	stop = true;
 	setTimeout(function() {
 		stop = false;
-		 animation(0.1);
+		animation(0.1);
 	}, 2);
 });
 
@@ -149,21 +118,19 @@ function earthquakeDataFromAPI() {
 						// console.log(earthquakeJSON);
 						for (i=0; i < data.features.length; i++) {
 							let feature = (data.features[i]);
-							let currentFeature = feature;
 							renderMarker(feature);	
 							renderEarthquake(feature, i);
 							let coords = feature.geometry.coordinates;
 							coordArray.push(coords);
 						}
-
 						renderTotalEarthquakes(data);
 					});
 }
 
 //renders markers on map using coordinates
 function renderMarker(feature) {
-	epochDate = feature.properties.time;
-	humanDate = new Date(epochDate);
+	let epochDate = feature.properties.time;
+	let humanDate = new Date(epochDate);
 	var marker = WE.marker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], 'pin.png', 32, 32).addTo(earth);
 	markers.push(marker);
 	marker.bindPopup(`
@@ -202,14 +169,18 @@ $('.earthquakeData').on('click', '.travelButton', function(event) {
 	//when go button is clicked, setView to coordinates
 	setView(currentCoords[1], currentCoords[0]);
 
-	//turn into its own function, call where needed
+	togglePopup(coordArrayIndex);
+	
+});
+
+//opens and closes popups when travel button is clicked
+function togglePopup(currentIndex, coor) {
 	if (currentIndex !== null) {
 		markers[currentIndex].closePopup();
 	} 
 	markers[coordArrayIndex].openPopup();
 	currentIndex = coordArrayIndex;
-	
-});
+}
 
 // $('we-pp-wrapper')
 
@@ -224,20 +195,15 @@ function renderEarthquake(feature, i) {
 	if (feature != undefined) {
 		$('.earthquakeData').append(earthquakeDataHTML)
 	}
-	//make bar slide into the margins
 }
 
 //listens to the user input, updates the DOM
-function displayNumberOfDays() {
-	$(document).on('input', '#myRange', function() {
+$('#dateAndMagForm').on('input', '#myRange', function() {
 		$('#numberOfDays').html( $(this).val() );
 	});
-}
-function displayMinimumMagnitude() {
-	$(document).on('input', '#magnitudeRange', function() {
+$('#dateAndMagForm').on('input', '#magnitudeRange', function() {
 		$('#minimumMagnitude').html( $(this).val() );
 	});
-}
 
 //News API -----------------------------------
 
@@ -272,17 +238,8 @@ function renderNews(article) {
 	`
 	$('.right-top').append(newsDivData);
 }
-//--------------------------------------------
+//-------------------------------------------
 
 
-displayMinimumMagnitude();
-displayNumberOfDays();
-
-//JS to do 
-//remove markers when new search
-//provide new inputs
-//when user submits, return api data
-//
-//
 
 	
