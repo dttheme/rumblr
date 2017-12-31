@@ -27,7 +27,18 @@ $('.js-submit-button').click(function(event) {
 	newsDataFromAPI();
 	$('.left-section').prop('hidden', false);
 	$('.right-section').prop('hidden', false);
-	$('.slidingDivLeft').css('animation', 'slideinleft 1s ease forwards');
+	$('.left-section').animate({
+		left: "0"
+	},{
+		duration: 2500,
+		easing: 'linear'
+	});
+	$('.right-section').animate({
+		right: '0'
+	},{
+		duration: 2500,
+		easing: 'linear'
+	})
 });
 
 //when the new search form is submitted, display new results

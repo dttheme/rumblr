@@ -218,7 +218,7 @@
  
   .left-section {
   	top: 0;
-  	left: 0;
+  	left: -23%;
   }
   .earthquakeData {
   	overflow-x: hidden;
@@ -231,7 +231,7 @@
   }
   .right-section {
   	top:0;
-  	right: 0;
+  	right: -23%;
   }
   .right-top {
   	height: 80%;
