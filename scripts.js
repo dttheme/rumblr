@@ -16,6 +16,7 @@ let coordArray = [];
 $(initialize());
 console.log(window);
 
+//
 
 //when the submit button is clicked, remove the prompt and send the input to the API
 $('.js-submit-button').click(function(event) {	
@@ -26,6 +27,7 @@ $('.js-submit-button').click(function(event) {
 	newsDataFromAPI();
 	$('.left-section').prop('hidden', false);
 	$('.right-section').prop('hidden', false);
+	$('.slidingDivLeft').css('animation', 'slideinleft 1s ease forwards');
 });
 
 //when the new search form is submitted, display new results
@@ -72,9 +74,9 @@ function animateEarth(vel) {
 	var before = null;
 	requestAnimationFrame(function animate(now) {
 		var c = earth.getPosition();
-		var elapsed = before? now - before: 0;
+		var elapsed = before ? now - before: 0;
 		before = now;
-		earth.setCenter([c[0], c[1] + vel *(elapsed/500)]);
+		earth.setCenter([c[0], c[1] + vel *(elapsed/200)]);
 		if(stop) {
 			return
 		}
@@ -87,8 +89,8 @@ $('#earth_div').click(function() {
 	stop = true;
 	setTimeout(function() {
 		stop = false;
-		animation(0.1);
-	}, 2);
+		animateEarth(0.1);
+	}, 5000);
 });
 
 //tiles the globe
@@ -162,7 +164,7 @@ $('.earthquakeData').on('click', '.travelButton', function(event) {
 	//this is the coordinates from the marker
 	let coordIDString = $(this).data('coordinate-id');
 	let coordIDCutString = coordIDString.slice(2);
-	let coordArrayIndex = parseInt(coordIDCutString);
+	coordArrayIndex = parseInt(coordIDCutString);
 	let currentCoords = coordArray[coordArrayIndex];
 	console.log('targetCenter is ' + (currentCoords[1]).toFixed(2), (currentCoords[0]).toFixed(2));
 
