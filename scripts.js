@@ -45,11 +45,22 @@ $('.js-submit-button').click(function(event) {
 $('.submitNewSearch').on('click', function(event) {
 	$('.earthquakeData').empty();
 	$('.searchAgainDiv').removeClass('hidden');
+	let href = $(this).attr('href');
+	setTimeout(function() {window.location = href}, 3000);
+	return false;
 })
 
-function delay (URL) {
-	setTimeout( function() { window.location = URL }, 500)
-}
+$('#leftTab').on('click', function(event) {
+	console.log('listening!')
+	if ($('.left-section').css('left') === '-23%') {
+		$(this).css('left', '23%');
+		$('#leftTab').css('content', '\f067')
+	} else if ($('.left-section').css('left') === '23%') {
+		$(this).css('left', '-23%')
+		$('#leftTab').css('content', '\f068')
+	}
+})
+
 
 //counts backwards to find past day
 function findDateInPast(date, days) {
