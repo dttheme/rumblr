@@ -11,12 +11,12 @@ let markers = [];
 let currentIndex = null;
 let stop = false;
 let coordArray = [];
+let rightOpen = true;
+let leftOpen = true;
 //------------------------------------------------
 //when the document is ready, create the globe
 $(initialize());
-console.log(window);
-
-//
+$('.landing-page').delay(1000).animate({opacity: 1}, 700);
 
 //when the submit button is clicked, remove the prompt and send the input to the API
 $('.js-submit-button').click(function(event) {	
@@ -30,37 +30,65 @@ $('.js-submit-button').click(function(event) {
 	$('.left-section').animate({
 		left: "0"
 	},{
-		duration: 2000,
+		duration: 1000,
 		easing: 'linear'
 	});
 	$('.right-section').animate({
 		right: '0'
 	},{
-		duration: 2000,
+		duration: 1000,
 		easing: 'linear'
 	})
 });
 
 //when the new search form is submitted, display new results
-$('.submitNewSearch').on('click', function(event) {
-	$('.earthquakeData').empty();
-	$('.searchAgainDiv').removeClass('hidden');
-	let href = $(this).attr('href');
-	setTimeout(function() {window.location = href}, 3000);
+$('.searchAgainButton').on('click', function(event) {
+	event.preventDefault();
+	let href = $('.searchAgainButton').attr('href');
+	setTimeout(function(){window.location = href}, 1000);
+	$('.left-section').animate({
+		left: "-30%"
+	},{
+		duration: 1000,
+		easing: 'linear'
+	});
+	$('.right-section').animate({
+		right: '-30%'
+	},{
+		duration: 1000,
+		easing: 'linear'
+	})
 	return false;
 })
 
 $('#leftTab').on('click', function(event) {
-	console.log('listening!')
-	if ($('.left-section').css('left') === '-23%') {
-		$(this).css('left', '23%');
-		$('#leftTab').css('content', '\f067')
-	} else if ($('.left-section').css('left') === '23%') {
-		$(this).css('left', '-23%')
-		$('#leftTab').css('content', '\f068')
+	leftOpen = !leftOpen;
+	if (leftOpen === false && window.innerWidth > 480) {
+		$('.left-section').animate({'left': '-23%'});
+		$('#leftTab').attr('data-content', '\f068')	
+	} else if (leftOpen === true && window.innerWidth > 480) {
+		$('.left-section').animate({'left' : '0'});
+		$('#leftTab').attr('data-content', '\f067')
+	} else if (leftOpen === false && window.innerWidth <= 480) {
+		$('.left-section').animate({'left': '-90%'});
+		$('#leftTab').attr('data-content', '\f068')	
+	} else if (leftOpen === true && window.innerWidth <= 480) {
+		$('.left-section').animate({'left' : '0'});
+		$('#leftTab').attr('data-content', '\f067')
 	}
+
 })
 
+$('#rightTab').on('click', function(event) {
+	rightOpen = !rightOpen;
+	if (rightOpen === false) {
+		$('.right-section').animate({'right': '-23%'});
+
+		} else {
+			$('.right-section').animate({'right': '0'})
+
+		}
+})
 
 //counts backwards to find past day
 function findDateInPast(date, days) {
