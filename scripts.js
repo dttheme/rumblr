@@ -30,13 +30,13 @@ $('.js-submit-button').click(function(event) {
 	$('.left-section').animate({
 		left: "0"
 	},{
-		duration: 2500,
+		duration: 2000,
 		easing: 'linear'
 	});
 	$('.right-section').animate({
 		right: '0'
 	},{
-		duration: 2500,
+		duration: 2000,
 		easing: 'linear'
 	})
 });
@@ -46,6 +46,10 @@ $('.submitNewSearch').on('click', function(event) {
 	$('.earthquakeData').empty();
 	$('.searchAgainDiv').removeClass('hidden');
 })
+
+function delay (URL) {
+	setTimeout( function() { window.location = URL }, 500)
+}
 
 //counts backwards to find past day
 function findDateInPast(date, days) {
