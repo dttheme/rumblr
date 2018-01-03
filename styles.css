@@ -271,7 +271,7 @@
   }
   #rightTab:before {
   	font-family: FontAwesome;
-  	content: '\f068';
+  	content: attr(data-content);
   }
   .right-top {
   	height: 80%;
@@ -410,23 +410,25 @@
 }
 
 @media only screen and (max-width: 480px) {
-	canvas {
-		width: 100%;
-		height: 100%;
+	#earth_div {
+		height: 100vh;
 	}
 	.landing-page {
 		top: 20%;
 		left: 15%;
 		width: 50%;
 	}
-	.left-section {
+	.left-section
+	.right-section {
 		width: 90%;
+	}
+	.left-section {
 		left: -90%;
 	}
 	.subheading {
 		font-size: 2vh;
 		float: right;
-		top:0;
+		top: 0;
 	}
 	h3 {
 		font-size: 2vh;
@@ -435,7 +437,6 @@
 		height: 10vh;
 	}
 	.right-section {
-		width: 0%;
 		right: -90%;
 	}
 	.right-top {

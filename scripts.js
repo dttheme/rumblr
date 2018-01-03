@@ -70,10 +70,10 @@ $('#leftTab').on('click', function(event) {
 		$('.left-section').animate({'left' : '0'});
 		$('#leftTab').attr('data-content', '\f067')
 	} else if (leftOpen === false && window.innerWidth <= 480) {
-		$('.left-section').animate({'left': '-90%'});
+		$('.left-section').animate({'left': '0'});
 		$('#leftTab').attr('data-content', '\f068')	
 	} else if (leftOpen === true && window.innerWidth <= 480) {
-		$('.left-section').animate({'left' : '0'});
+		$('.left-section').animate({'left' : '-90%'});
 		$('#leftTab').attr('data-content', '\f067')
 	}
 
@@ -81,13 +81,19 @@ $('#leftTab').on('click', function(event) {
 
 $('#rightTab').on('click', function(event) {
 	rightOpen = !rightOpen;
-	if (rightOpen === false) {
+	if (rightOpen === false && window.innerWidth > 480) {
 		$('.right-section').animate({'right': '-23%'});
-
-		} else {
-			$('.right-section').animate({'right': '0'})
-
-		}
+		$('#rightTab').attr('data-content', '\f068')	
+	} else if (rightOpen === true && window.innerWidth > 480) {
+		$('.right-section').animate({'right': '0'})
+		$('#rightTab').attr('data-content', '\f067')
+	} else if (rightOpen === false && window.innerWidth <= 480) {
+		$('.right-section').animate({'right': '-90%'});
+		$('#rightTab').attr('data-content', '\f068')	
+	} else if (leftOpen === true && window.innerWidth <= 480) {
+		$('.left-section').animate({'right' : '0'});
+		$('#rightTab').attr('data-content', '\f067')
+	}
 })
 
 //counts backwards to find past day
@@ -220,25 +226,23 @@ $('.earthquakeData').on('click', '.travelButton', function(event) {
 	let coordIDCutString = coordIDString.slice(2);
 	coordArrayIndex = parseInt(coordIDCutString);
 	let currentCoords = coordArray[coordArrayIndex];
-	console.log('targetCenter is ' + (currentCoords[1]).toFixed(2), (currentCoords[0]).toFixed(2));
+	// console.log('targetCenter is ' + (currentCoords[1]).toFixed(2), (currentCoords[0]).toFixed(2));
 
 	//when go button is clicked, setView to coordinates
 	setView(currentCoords[1], currentCoords[0]);
 
-	togglePopup(coordArrayIndex);
-	
-});
-
-//opens and closes popups when travel button is clicked
-function togglePopup(currentIndex, coor) {
+	// togglePopup(coordArrayIndex, currentCoords);
 	if (currentIndex !== null) {
 		markers[currentIndex].closePopup();
 	} 
 	markers[coordArrayIndex].openPopup();
 	currentIndex = coordArrayIndex;
-}
+});
 
-// $('we-pp-wrapper')
+//opens and closes popups when travel button is clicked
+// function togglePopup(currentIndex, coords) {
+	
+// }
 
 //creates a side bar featuring details
 function renderEarthquake(feature, i) {
