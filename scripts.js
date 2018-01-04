@@ -138,6 +138,7 @@ $('#rightTab').on('click', function(event) {
 	}
 })
 
+//if a tab is open and the viewport is smaller than 480, when the other tab is clicked, close the current one and open the new one
 if (leftOpen === true && window.innerWidth <= 480) {
 			$('.right-section').animate({
 				right: '-90%'
@@ -253,7 +254,7 @@ function renderMarker(feature) {
 	var marker = WE.marker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], 'pin.png', 32, 32).addTo(earth);
 	markers.push(marker);
 	marker.bindPopup(`
-		<div class='popupDiv'>
+		<div class='popupDiv' aria-live='assertive'>
 		<p>
 		<b>Location:</b> ${feature.properties.place} <br>
 		<b>Date:</b> ${humanDate} <br>
@@ -274,7 +275,7 @@ function setView(lat, long) {
 function renderTotalEarthquakes(data) {
 	let dayNumber = $('#myRange').val()
 	$('.totalEarthquakes').html(
-		`<p style='font-weight: 900;'>There have been ${data.metadata.count} earthquakes in the last ${dayNumber} day(s) that match your search.</p>`
+		`<p style='font-weight: 900;' aria-live='assertive'>There have been ${data.metadata.count} earthquakes in the last ${dayNumber} day(s) that match your search.</p>`
 		)
 }
 
@@ -305,7 +306,7 @@ function renderEarthquake(feature, i) {
 	let buttonIdentifier = 'tb' + i;
 	let earthquakeDataHTML = 
 	`<div class='dataDiv'>
-	<span class='locationSpan'>${feature.properties.title}</span>&nbsp&nbsp<button class='travelButton' data-coordinate-id=${buttonIdentifier} title='Travel to earthquake location'><i class="fa fa-bullseye bullseye"></i></button>
+	<span class='locationSpan'>${feature.properties.title}</span>&nbsp&nbsp<button class='travelButton' data-coordinate-id=${buttonIdentifier} title='Travel to earthquake location: ${feature.properties.place}'><i class="fa fa-bullseye bullseye"></i></button>
 	</div>
 	`;
 	if (feature != undefined) {
