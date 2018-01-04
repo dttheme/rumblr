@@ -274,6 +274,8 @@ h4 {
 .right-footer {
 	float: right;
 	height: auto;
+	padding-top: 5%;
+	padding-right: 7%;
 }
 .socialbutton {
 	color: white;
@@ -371,7 +373,7 @@ h4 {
 	}
 	.landing-page {
 		opacity: .99;
-		top: 20%;
+		top: 7%;
 		left: 15%;
 		width: 50%;
 	}
@@ -382,3 +384,7 @@ h4 {
 		opacity: .99;
 		width: 90%;
 	}
+	.right-footer {
+		padding-top: 1%;
+	}
+}

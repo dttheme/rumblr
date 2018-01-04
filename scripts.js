@@ -69,8 +69,9 @@ function WidthChange(mq) {
 		$('.rightTabIcon')
 			.removeClass('fa-minus')
 			.addClass('fa-plus');
-		$('.mobileHeader').prop('hidden', false)
+		$('.mobileHeader').prop('hidden', false);
 	} else { 
+		$('.mobileHeader').prop('hidden', true);
 		$('.left-section').animate({
 		left: "0"
 	},{
@@ -101,13 +102,13 @@ $('#leftTab').on('click', function(event) {
 	} else if (leftOpen === false && window.innerWidth <= 480) {
 		$('.left-section').animate({'left': '-90%'});
 		$('.leftTabIcon')
-			.removeClass('fa-plus')
-			.addClass('fa-minus')	
+			.removeClass('fa-minus')
+			.addClass('fa-plus')	
 	} else if (leftOpen === true && window.innerWidth <= 480) {
 		$('.left-section').animate({'left' : '0'});
 		$('.leftTabIcon')
-			.removeClass('fa-minus')
-			.addClass('fa-plus')
+			.removeClass('fa-plus')
+			.addClass('fa-minus')
 	}
 })
 
@@ -127,15 +128,33 @@ $('#rightTab').on('click', function(event) {
 	} else if (rightOpen === false && window.innerWidth <= 480) {
 		$('.right-section').animate({'right': '-90%'});
 		$('.rightTabIcon')
-			.removeClass('fa-plus')
-			.addClass('fa-minus')	
+			.removeClass('fa-minus')
+			.addClass('fa-plus')	
 	} else if (rightOpen === true && window.innerWidth <= 480) {
 		$('.right-section').animate({'right' : '0'});
 		$('.rightTabIcon')
-			.removeClass('fa-minus')
-			.addClass('fa-plus')
+			.removeClass('fa-plus')
+			.addClass('fa-minus')
 	}
 })
+
+if (leftOpen === true && window.innerWidth <= 480) {
+			$('.right-section').animate({
+				right: '-90%'
+			},{
+				duration: 1000,
+				easing: 'linear'
+			});
+			rightOpen = false;
+		} else if (rightOpen === true && window.innerWidth <= 480) {
+			$('.left-section').animate({
+				left: "-90%"
+			},{
+				duration: 1000,
+				easing: 'linear'
+			});
+			leftOpen = false;
+		}
 
 //counts backwards to find past day
 function findDateInPast(date, days) {
