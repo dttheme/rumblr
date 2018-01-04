@@ -1,4 +1,5 @@
 
+'use strict';
 //Global Variables--------------------------------
 var options = {
 	atmosphere: true, 
@@ -166,8 +167,8 @@ function initialize() {
 //pulls data from the USGS API using input parameters
 const USGS_EARTHQUAKE_URL = 'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson';
 function earthquakeDataFromAPI() {
-	minMag = $('#magnitudeRange').val();
-	today = new Date();
+	let minMag = $('#magnitudeRange').val();
+	let today = new Date();
 	let todayDate = createDateForURL(today);
 	const query = {
 		starttime: submitDateToAPI(),
@@ -178,7 +179,7 @@ function earthquakeDataFromAPI() {
 		let earthquakeJSON = JSON.stringify(data, null, 2);
 						//Pretty print JSON					
 						// console.log(earthquakeJSON);
-						for (i=0; i < data.features.length; i++) {
+						for (let i=0; i < data.features.length; i++) {
 							let feature = (data.features[i]);
 							renderMarker(feature);	
 							renderEarthquake(feature, i);
@@ -224,7 +225,7 @@ $('.earthquakeData').on('click', '.travelButton', function(event) {
 	//this is the coordinates from the marker
 	let coordIDString = $(this).data('coordinate-id');
 	let coordIDCutString = coordIDString.slice(2);
-	coordArrayIndex = parseInt(coordIDCutString);
+	let coordArrayIndex = parseInt(coordIDCutString);
 	let currentCoords = coordArray[coordArrayIndex];
 	// console.log('targetCenter is ' + (currentCoords[1]).toFixed(2), (currentCoords[0]).toFixed(2));
 
@@ -247,7 +248,7 @@ $('.earthquakeData').on('click', '.travelButton', function(event) {
 //creates a side bar featuring details
 function renderEarthquake(feature, i) {
 	let buttonIdentifier = 'tb' + i;
-	earthquakeDataHTML = 
+	let earthquakeDataHTML = 
 	`<div class='dataDiv'>
 	<span class='locationSpan'>${feature.properties.title}</span>&nbsp&nbsp<button class='travelButton' data-coordinate-id=${buttonIdentifier} title='Travel to earthquake location'><i class="fa fa-bullseye bullseye"></i></button>
 	</div>
@@ -281,7 +282,7 @@ function newsDataFromAPI() {
 		let newsJSON = JSON.stringify(data, null, 2);
 		//pretty print JSON
 		// console.log(newsJSON);
-		for (i=0; i < data.articles.length; i++) {
+		for (let i=0; i < data.articles.length; i++) {
 					let article = (data.articles[i]);
 					renderNews(article);
 						}
@@ -290,7 +291,7 @@ function newsDataFromAPI() {
 }
 
 function renderNews(article) {
-	newsDivData = `
+	let newsDivData = `
 	<div class='newsDiv'>
 	<a href=${article.url} target='_blank'><p style='font-weight:700;'>${article.title}</p></a>
 	<p>${article.description}</p>

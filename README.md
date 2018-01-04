@@ -13,7 +13,7 @@ An application that allows users to input an amount of time and a minimum magnit
 
 Rumblr is intended to keep its users well-informed of recent seismic activity. While giving this data back to the user is informative, seeing earthquakes rendered on a globe provides a sense of scale not normally gained from listed information. As the user explores the globe, they are also provided with relavent news. In combination, the data, globe and news provided to the user give a -- experience that cannot be gathered from any one individual piece of the application.
 
-##Technical
+###Technical
 
 + This application was built using a combination of HTML, CSS, JavaScript, JQuery
 + The earthquake data for the application was provided by the USGS Earthquake API, the globe was rendered using WebGL Earth API, and the news is returned from the News API.
