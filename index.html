@@ -1,65 +1,59 @@
-	<!DOCTYPE HTML>
-	<html lang="en">
-	<head>
-		<meta charset="utf-8">
-	    <meta name="viewport" content="width=device-width">
-	    <title>Rumblr | Earthquake tracking and information sharing</title>
-		<script src="https://use.fontawesome.com/7f641b72ff.js"></script>
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans|Poppins:400,900i" rel="stylesheet">
-		<link rel="shortcut icon" href="favicon-exchange.ico" type="image/x-icon">
-		<link rel="stylesheet" type="text/css" href='styles.css'>
-		
-	</head>
-	<body>
-		<main roll='main'>
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Rumblr | Earthquake tracking and information sharing</title>
+	<script src="https://use.fontawesome.com/7f641b72ff.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Poppins:400,900i" rel="stylesheet">
+	<link rel="shortcut icon" href="favicon-exchange.ico" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href='styles.css'>
+</head>
+<body>
+	<main roll='main'>
 		<div class="landing-page">
 			<h1>Rumblr</h1><i class="fa fa-exchange fa-4x icon" aria-hidden="true"></i><br><br>
 			<p class="subheading">Earthquake tracking and information sharing</p><br><br>
 			<div id="slidecontainer">
-			<form name='earthquake-date-and-magnitude' id='dateAndMagForm'>
+				<form name='earthquake-date-and-magnitude' id='dateAndMagForm'>
 					<label for='myRange'>I would like to see earthquakes from the last <span id='numberOfDays'>1</span> day(s).</label>
-	  				<input type="range" min="1" max="30" value="1" class="slider" id="myRange">
-	  				<label for='magnitudeRange'>I would like to see earthquakes with a magnitude of <span id='minimumMagnitude'>1</span> and above.</label>
-	  				<input type="range" min="1" max="10" value="1" step='0.5' class="slider" id="magnitudeRange">
-	  				<button type="submit" role='button' class='js-submit-button submit'>
-	  				<span>Submit </span>
-	  				</button>
-  			</form>
+					<input type="range" min="1" max="30" value="1" class="slider" id="myRange">
+					<label for='magnitudeRange'>I would like to see earthquakes with a magnitude of <span id='minimumMagnitude'>1</span> and above.</label>
+					<input type="range" min="1" max="10" value="1" step='0.5' class="slider" id="magnitudeRange">
+					<button type="submit" role='button' class='js-submit-button submit'>
+						<span>Submit </span>
+					</button>
+				</form>
 			</div>
-			
 		</div>
-			<div id="earth_div"></div>
-			<section class='left-section' hidden>
-				<div id='leftTab'><span></span></div>
-				<h2>Rumblr</h2><i class="fa fa-exchange fa-4x icon-inside" aria-hidden="true"></i><br><br><br>
-				<p class="subheading">Earthquake tracking and information sharing</p><br><br>
-				<h3>Results</h3>
-				<div class='totalEarthquakes' aria-live='assertive'>
-				</div>
-				<div class="earthquakeData" aria-live='assertive'></div>
-				<div class='searchAgainDiv'>
-					<a href='./index.html' role='button' class="searchAgainButton">New Search
-					</a>
-				</div>
-
-			</section>
-			<section class='right-section' hidden>
+		<div id="earth_div"></div>
+		<section class='left-section' hidden>
+			<div id='leftTab'><span></span></div>
+			<h2>Rumblr</h2><i class="fa fa-exchange fa-4x icon-inside" aria-hidden="true"></i><br><br><br>
+			<p class="subheading">Earthquake tracking and information sharing</p><br><br>
+			<h3>Results</h3>
+			<div class='totalEarthquakes' aria-live='assertive'>
+			</div>
+			<div class="earthquakeData" aria-live='assertive'></div>
+			<div class='searchAgainDiv'>
+				<a href='./index.html' role='button' class="searchAgainButton">New Search
+				</a>
+			</div>
+		</section>
+		<section class='right-section' hidden>
 			<div id='rightTab'></div>
 			<h4>Earthquake News</h4>
-				<div class="right-top" aria-live='assertive'>
-				</div>
-				<div class='right-footer'>
+			<div class="right-top" aria-live='assertive'>
+			</div>
+			<div class='right-footer'>
 				<a href='https://github.com/dttheme'><i class='fa fa-github-square fa-2x socialbutton' role='button' href='https://github.com/dttheme' title='GitHub'></i></a>&nbsp&nbsp
 				<a href='https://www.linkedin.com/in/dyanna-turner-55a95b6b/'><i class='fa fa-linkedin-square fa-2x socialbutton' role='button' title='LinkedIn'></i></a>&nbsp&nbsp
-				</div>
-				
-			</section>
-			
-		</main>
-		
-		<script src="https://www.webglearth.com/v2/api.js"></script>
-		<script
-		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-		<script src='scripts.js'></script>
-	</body>
-	</html>
+			</div>
+		</section>
+	</main>
+	<script src="https://www.webglearth.com/v2/api.js"></script>
+	<script
+	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src='scripts.js'></script>
+</body>
+</html>

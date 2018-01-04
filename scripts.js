@@ -1,5 +1,6 @@
 
 'use strict';
+
 //Global Variables--------------------------------
 var options = {
 	atmosphere: true, 
@@ -15,6 +16,7 @@ let coordArray = [];
 let rightOpen = true;
 let leftOpen = true;
 //------------------------------------------------
+
 //when the document is ready, create the globe
 $(initialize());
 $('.landing-page').delay(1000).animate({opacity: 1}, 700);
@@ -42,7 +44,7 @@ $('.js-submit-button').click(function(event) {
 	})
 });
 
-//when the new search form is submitted, display new results
+//when the new search form is submitted, display new results with animation
 $('.searchAgainButton').on('click', function(event) {
 	event.preventDefault();
 	let href = $('.searchAgainButton').attr('href');
@@ -62,6 +64,7 @@ $('.searchAgainButton').on('click', function(event) {
 	return false;
 })
 
+//toggle left section in and out of the page, depending on flag current state and viewport width
 $('#leftTab').on('click', function(event) {
 	leftOpen = !leftOpen;
 	if (leftOpen === false && window.innerWidth > 480) {
@@ -77,9 +80,9 @@ $('#leftTab').on('click', function(event) {
 		$('.left-section').animate({'left' : '-90%'});
 		$('#leftTab').attr('data-content', '\f067')
 	}
-
 })
 
+//toggle right section in and out of the page, depending on flag current state and viewport width
 $('#rightTab').on('click', function(event) {
 	rightOpen = !rightOpen;
 	if (rightOpen === false && window.innerWidth > 480) {
@@ -127,7 +130,6 @@ function revealEarth() {
 	$('.landing-page').addClass('hidden');
 	$('.left-section').removeClass('hidden');
 	$('.right-section').removeClass('hidden');
-
 }
 
 //animates Earth
@@ -145,7 +147,7 @@ function animateEarth(vel) {
 	});
 }
 
-//research how to stop earth animation
+//when the earth is clicked, stop the earth anination for 5 seconds
 $('#earth_div').click(function() {
 	stop = true;
 	setTimeout(function() {
@@ -154,7 +156,7 @@ $('#earth_div').click(function() {
 	}, 5000);
 });
 
-//tiles the globe
+//adds pictures of earth surface to the globe
 function initialize() {
 	WE.tileLayer('https://tileserver.maptiler.com/nasa/{z}/{x}/{y}.jpg', {
 		minZoom: 0,
@@ -209,6 +211,7 @@ function renderMarker(feature) {
 		</div>`)
 }
 
+//sets the view of the earth to coordinates
 function setView(lat, long) {
 	earth.setView([lat, long])
 }
@@ -221,15 +224,13 @@ function renderTotalEarthquakes(data) {
 		)
 }
 
+//when the travelButton is clicked, take the coordinates from the marker, set the earth view to coordinates and open popup
 $('.earthquakeData').on('click', '.travelButton', function(event) {
 	//this is the coordinates from the marker
 	let coordIDString = $(this).data('coordinate-id');
 	let coordIDCutString = coordIDString.slice(2);
 	let coordArrayIndex = parseInt(coordIDCutString);
 	let currentCoords = coordArray[coordArrayIndex];
-	// console.log('targetCenter is ' + (currentCoords[1]).toFixed(2), (currentCoords[0]).toFixed(2));
-
-	//when go button is clicked, setView to coordinates
 	setView(currentCoords[1], currentCoords[0]);
 
 	// togglePopup(coordArrayIndex, currentCoords);
@@ -245,7 +246,7 @@ $('.earthquakeData').on('click', '.travelButton', function(event) {
 	
 // }
 
-//creates a side bar featuring details
+//creates an element to hold the information for each earthquake
 function renderEarthquake(feature, i) {
 	let buttonIdentifier = 'tb' + i;
 	let earthquakeDataHTML = 
@@ -258,7 +259,7 @@ function renderEarthquake(feature, i) {
 	}
 }
 
-//listens to the user input, updates the DOM
+//listens to the user input on the range and then updates the content on the page
 $('#dateAndMagForm').on('input', '#myRange', function() {
 		$('#numberOfDays').html( $(this).val() );
 	});
@@ -266,9 +267,7 @@ $('#dateAndMagForm').on('input', '#magnitudeRange', function() {
 		$('#minimumMagnitude').html( $(this).val() );
 	});
 
-//News API -----------------------------------
-
-//grab JSON from NewsAPI
+//grab JSON data from NewsAPI
 const NEWS_URL = 'https://newsapi.org/v2/everything?q=earthquake'
 function newsDataFromAPI() {
 	const query = {
@@ -290,6 +289,7 @@ function newsDataFromAPI() {
 	});
 }
 
+//creates an element to hold the information for each news article
 function renderNews(article) {
 	let newsDivData = `
 	<div class='newsDiv'>
@@ -299,8 +299,3 @@ function renderNews(article) {
 	`
 	$('.right-top').append(newsDivData);
 }
-//-------------------------------------------
-
-
-
-	
