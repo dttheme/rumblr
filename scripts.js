@@ -30,18 +30,10 @@ $('.js-submit-button').click(function(event) {
 	newsDataFromAPI();
 	$('.left-section').prop('hidden', false);
 	$('.right-section').prop('hidden', false);
-	$('.left-section').animate({
-		left: "0"
-	},{
-		duration: 1000,
-		easing: 'linear'
-	});
-	$('.right-section').animate({
-		right: '0'
-	},{
-		duration: 1000,
-		easing: 'linear'
-	})
+	if (matchMedia) { 
+	const mq = window.matchMedia("(max-width: 480px)"); 
+	mq.addListener(WidthChange); WidthChange(mq); 
+}
 });
 
 //when the new search form is submitted, display new results with animation
@@ -64,22 +56,33 @@ $('.searchAgainButton').on('click', function(event) {
 	return false;
 })
 
-if (window.innerWidth <= 480) {
-	leftOpen = false;
-	rightOpen = false
-}
-
-if (matchMedia) { 
-	const mq = window.matchMedia("(max-width: 480px)"); 
-	mq.addListener(WidthChange); WidthChange(mq); 
-}
-
+//takes a media query as an argument and if it is under 480px in width, the page will load with tabs closed. otherwise, tabs will load open
 function WidthChange(mq) { 
 	if (mq.matches) { 
+		leftOpen = false;
+		rightOpen = false;
 		$('.left-section').css('left', '-90%'); 
-		$('.right-section').css('right', '-90%')
+		$('.leftTabIcon')
+			.removeClass('fa-minus')
+			.addClass('fa-plus');
+		$('.right-section').css('right', '-90%');
+		$('.rightTabIcon')
+			.removeClass('fa-minus')
+			.addClass('fa-plus');
+		$('.mobileHeader').prop('hidden', false)
 	} else { 
-		console.log(mq, mq.matches); 
+		$('.left-section').animate({
+		left: "0"
+	},{
+		duration: 1000,
+		easing: 'linear'
+	});
+	$('.right-section').animate({
+		right: '0'
+	},{
+		duration: 1000,
+		easing: 'linear'
+	}) 
 	} }
 
 //toggle left section in and out of the page, depending on flag current state and viewport width
@@ -126,8 +129,8 @@ $('#rightTab').on('click', function(event) {
 		$('.rightTabIcon')
 			.removeClass('fa-plus')
 			.addClass('fa-minus')	
-	} else if (leftOpen === true && window.innerWidth <= 480) {
-		$('.left-section').animate({'right' : '0'});
+	} else if (rightOpen === true && window.innerWidth <= 480) {
+		$('.right-section').animate({'right' : '0'});
 		$('.rightTabIcon')
 			.removeClass('fa-minus')
 			.addClass('fa-plus')

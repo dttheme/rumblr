@@ -10,6 +10,7 @@ body {
 }
 main {
 	position: relative;
+	overflow: hidden;
 }
 #earth_div{
 	top: 0; 
@@ -18,7 +19,7 @@ main {
 	left: 0;
 	height: 100vh;
 	background-color: #000; 
-	position: absolute;
+	position: relative;
 }
 .popupDiv {
 	font-family: 'Open Sans', sans-serif;
@@ -310,9 +311,12 @@ h4 {
 	padding-top: 20px;
 }
 .mobileHeader {
+	background-color: rgba(223, 237, 255, 0.5);
 	width: 100%;
-	height: auto;
+	height: 150px;
+	overflow:hidden;
 	position: absolute;
+	z-index: 1000;
 	top:0;
 }
 @media only screen and (max-width: 1200px) {
@@ -322,9 +326,6 @@ h4 {
 	}
 }
 @media only screen and (max-width: 992px) {
-	h3 {
-		font-size: 2vw;
-	}
 	.totalEarthquakes {
 		font-size: 2vh;
 	}
@@ -333,18 +334,18 @@ h4 {
 		overflow-wrap: break-word;
 	}
 	.landing-page {
-		font-size: 2vmin;
+		font-size: 3vmin;
 	}
 }
 @media only screen and (max-width: 768px) {
 	h4 {
-		font-size: 2vw;
+		font-size: 15px;
 	}
 	.right-top {
-		font-size: 11px;
+		font-size: 12px;
 	}
 	.right-top a {
-		font-size: 11px !important;
+		font-size: 12px !important;
 	}
 	.locationSpan {
 		font-size: 11px;
@@ -359,22 +360,25 @@ h4 {
 	}
 }
 @media only screen and (max-width: 480px) {
+	.earthquakeData {
+		height: 80%;
+	}
+	.leftLogo {
+		display: none;
+	}
 	canvas {
 		height: 100vh;
 	}
 	.landing-page {
+		opacity: .99;
 		top: 20%;
 		left: 15%;
 		width: 50%;
 	}
 	.left-section,
 	.right-section {
+		height: 500px;
+		top: 150px;
+		opacity: .99;
 		width: 90%;
 	}
-	.left-section {
-		left: -90% !important;
-	}
-	.right-section {
-		right: -90% !important;
-	}
-}
