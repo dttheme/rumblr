@@ -4,6 +4,10 @@
 # Rumblr
 ## Earthquake tracking and information sharing
 
+![alt text](http://i66.tinypic.com/2ur8myw.png "Rumblr Landing Page")
+
+![alt text](http://i65.tinypic.com/sqkspj.png "Rumblr Main Page")
+
 ###Introduction
 
 An application that allows users to input an amount of time and a minimum magnitude. It then returns the number of earthquakes in the specified time and magnitude range, along with all of their details, on the left side of the page. This information is populated on the 3D-rendered globe, with markers at the specific coordinates and popups with additional details. News stories from the time period specified are featured on the right side.
