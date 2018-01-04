@@ -123,8 +123,18 @@ main {
 }
 .searchAgainButton {
 	text-decoration: none;
+	position: absolute;
+	bottom: 5px;
+	left: 5px;
 	padding: 3px 10px;
 	margin: 3px 10px;
+}
+.searchAgainDiv {
+	height: 30px;
+	width: 100%;
+	display: block;
+	bottom: 0;
+	left: 0;
 }
 .submit {
 	padding: 10px 60px;
@@ -138,6 +148,7 @@ main {
 .submit span:after{
 	font-family: FontAwesome;
 	content: '\f101';
+	font-size: 20px;
 	position: absolute;
 	opacity: 0;
 	top: 0;
@@ -163,14 +174,14 @@ h1, h2 {
 h3, h4 {
 	font-family: 'Poppins', 'Open Sans', sans-serif;
 	padding-left: 10px;
-	padding-top: 20px;
 	margin: 0;
 }
 h3  {
-	font-size: 20px;
+	font-size: 17px;
 }
 h4 {
-	font-size: 23px;
+	font-size: 20px;
+	padding-top: 10px;
 	padding-bottom: 10px;
 }	
 ::-webkit-scrollbar {
@@ -194,6 +205,7 @@ h4 {
 	position: absolute;
 	top: 30px;
 	font-size: 14px;
+	z-index: 1000;
 }
 .left-section {
 	top: 0;
@@ -212,6 +224,10 @@ h4 {
 	color: #0C213D;
 	top: 20px;
 	right: -30px;
+}
+.earthquakeDataWrapper {
+	height: 80%;
+	margin-bottom: 20px;
 }
 .earthquakeData {
 	overflow-x: hidden;
@@ -293,11 +309,11 @@ h4 {
 .newsDiv {
 	padding-top: 20px;
 }
-.searchAgainDiv {
+.mobileHeader {
+	width: 100%;
 	height: auto;
 	position: absolute;
-	bottom: 3%;
-	left: 5%;
+	top:0;
 }
 @media only screen and (max-width: 1200px) {
 	.earthquakeData {
@@ -343,7 +359,7 @@ h4 {
 	}
 }
 @media only screen and (max-width: 480px) {
-	#earth_div {
+	canvas {
 		height: 100vh;
 	}
 	.landing-page {
@@ -351,28 +367,14 @@ h4 {
 		left: 15%;
 		width: 50%;
 	}
-	.left-section
+	.left-section,
 	.right-section {
 		width: 90%;
 	}
 	.left-section {
-		left: -90%;
-	}
-	.subheading {
-		font-size: 2vh;
-		float: right;
-		top: 0;
-	}
-	h3 {
-		font-size: 2vh;
-	}
-	.earthquakeData {
-		height: 10vh;
+		left: -90% !important;
 	}
 	.right-section {
-		right: -90%;
+		right: -90% !important;
 	}
-	.right-top {
-		height: 10vh;
-	}
-
+}

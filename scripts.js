@@ -64,6 +64,24 @@ $('.searchAgainButton').on('click', function(event) {
 	return false;
 })
 
+if (window.innerWidth <= 480) {
+	leftOpen = false;
+	rightOpen = false
+}
+
+if (matchMedia) { 
+	const mq = window.matchMedia("(max-width: 480px)"); 
+	mq.addListener(WidthChange); WidthChange(mq); 
+}
+
+function WidthChange(mq) { 
+	if (mq.matches) { 
+		$('.left-section').css('left', '-90%'); 
+		$('.right-section').css('right', '-90%')
+	} else { 
+		console.log(mq, mq.matches); 
+	} }
+
 //toggle left section in and out of the page, depending on flag current state and viewport width
 $('#leftTab').on('click', function(event) {
 	leftOpen = !leftOpen;
@@ -78,12 +96,12 @@ $('#leftTab').on('click', function(event) {
 			.removeClass('fa-plus')
 			.addClass('fa-minus')
 	} else if (leftOpen === false && window.innerWidth <= 480) {
-		$('.left-section').animate({'left': '0'});
+		$('.left-section').animate({'left': '-90%'});
 		$('.leftTabIcon')
 			.removeClass('fa-plus')
 			.addClass('fa-minus')	
 	} else if (leftOpen === true && window.innerWidth <= 480) {
-		$('.left-section').animate({'left' : '-90%'});
+		$('.left-section').animate({'left' : '0'});
 		$('.leftTabIcon')
 			.removeClass('fa-minus')
 			.addClass('fa-plus')
