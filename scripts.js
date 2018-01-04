@@ -69,16 +69,24 @@ $('#leftTab').on('click', function(event) {
 	leftOpen = !leftOpen;
 	if (leftOpen === false && window.innerWidth > 480) {
 		$('.left-section').animate({'left': '-23%'});
-		$('#leftTab').attr('data-content', '\f068')	
+		$('.leftTabIcon')
+			.removeClass('fa-minus')
+			.addClass('fa-plus')
 	} else if (leftOpen === true && window.innerWidth > 480) {
 		$('.left-section').animate({'left' : '0'});
-		$('#leftTab').attr('data-content', '\f067')
+		$('.leftTabIcon')
+			.removeClass('fa-plus')
+			.addClass('fa-minus')
 	} else if (leftOpen === false && window.innerWidth <= 480) {
 		$('.left-section').animate({'left': '0'});
-		$('#leftTab').attr('data-content', '\f068')	
+		$('.leftTabIcon')
+			.removeClass('fa-plus')
+			.addClass('fa-minus')	
 	} else if (leftOpen === true && window.innerWidth <= 480) {
 		$('.left-section').animate({'left' : '-90%'});
-		$('#leftTab').attr('data-content', '\f067')
+		$('.leftTabIcon')
+			.removeClass('fa-minus')
+			.addClass('fa-plus')
 	}
 })
 
@@ -87,16 +95,24 @@ $('#rightTab').on('click', function(event) {
 	rightOpen = !rightOpen;
 	if (rightOpen === false && window.innerWidth > 480) {
 		$('.right-section').animate({'right': '-23%'});
-		$('#rightTab').attr('data-content', '\f068')	
+		$('.rightTabIcon')
+			.removeClass('fa-minus')
+			.addClass('fa-plus')	
 	} else if (rightOpen === true && window.innerWidth > 480) {
 		$('.right-section').animate({'right': '0'})
-		$('#rightTab').attr('data-content', '\f067')
+		$('.rightTabIcon')
+			.removeClass('fa-plus')
+			.addClass('fa-minus')
 	} else if (rightOpen === false && window.innerWidth <= 480) {
 		$('.right-section').animate({'right': '-90%'});
-		$('#rightTab').attr('data-content', '\f068')	
+		$('.rightTabIcon')
+			.removeClass('fa-plus')
+			.addClass('fa-minus')	
 	} else if (leftOpen === true && window.innerWidth <= 480) {
 		$('.left-section').animate({'right' : '0'});
-		$('#rightTab').attr('data-content', '\f067')
+		$('.rightTabIcon')
+			.removeClass('fa-minus')
+			.addClass('fa-plus')
 	}
 })
 
@@ -179,16 +195,14 @@ function earthquakeDataFromAPI() {
 	};
 	$.getJSON(USGS_EARTHQUAKE_URL, query, function(data){
 		let earthquakeJSON = JSON.stringify(data, null, 2);
-						//Pretty print JSON					
-						// console.log(earthquakeJSON);
-						for (let i=0; i < data.features.length; i++) {
-							let feature = (data.features[i]);
-							renderMarker(feature);	
-							renderEarthquake(feature, i);
-							let coords = feature.geometry.coordinates;
-							coordArray.push(coords);
-						}
-						renderTotalEarthquakes(data);
+			for (let i=0; i < data.features.length; i++) {
+				let feature = (data.features[i]);
+				renderMarker(feature);	
+				renderEarthquake(feature, i);
+				let coords = feature.geometry.coordinates;
+				coordArray.push(coords);
+			}
+			renderTotalEarthquakes(data);
 					});
 }
 
@@ -261,11 +275,11 @@ function renderEarthquake(feature, i) {
 
 //listens to the user input on the range and then updates the content on the page
 $('#dateAndMagForm').on('input', '#myRange', function() {
-		$('#numberOfDays').html( $(this).val() );
-	});
+	$('#numberOfDays').html( $(this).val() );
+});
 $('#dateAndMagForm').on('input', '#magnitudeRange', function() {
-		$('#minimumMagnitude').html( $(this).val() );
-	});
+	$('#minimumMagnitude').html( $(this).val() );
+});
 
 //grab JSON data from NewsAPI
 const NEWS_URL = 'https://newsapi.org/v2/everything?q=earthquake'
@@ -282,10 +296,10 @@ function newsDataFromAPI() {
 		//pretty print JSON
 		// console.log(newsJSON);
 		for (let i=0; i < data.articles.length; i++) {
-					let article = (data.articles[i]);
-					renderNews(article);
-						}
-	
+			let article = (data.articles[i]);
+			renderNews(article);
+		}
+
 	});
 }
 

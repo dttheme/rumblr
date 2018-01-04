@@ -10,10 +10,11 @@
 	<link rel="stylesheet" type="text/css" href='styles.css'>
 </head>
 <body>
-	<main roll='main'>
+	<main role='main'>
 		<div class="landing-page">
-			<h1>Rumblr</h1><i class="fa fa-exchange fa-4x icon" aria-hidden="true"></i><br><br>
-			<p class="subheading">Earthquake tracking and information sharing</p><br><br>
+		<h1>
+			<img src ='Rumblr_logo_transparent.png' alt='Rumblr, earthquake tracking and information sharing' class='pageTitle'>
+		</h1>
 			<div id="slidecontainer">
 				<form name='earthquake-date-and-magnitude' id='dateAndMagForm'>
 					<label for='myRange'>I would like to see earthquakes from the last <span id='numberOfDays'>1</span> day(s).</label>
@@ -28,9 +29,8 @@
 		</div>
 		<div id="earth_div"></div>
 		<section class='left-section' hidden>
-			<div id='leftTab'><span></span></div>
-			<h2>Rumblr</h2><i class="fa fa-exchange fa-4x icon-inside" aria-hidden="true"></i><br><br><br>
-			<p class="subheading">Earthquake tracking and information sharing</p><br><br>
+			<div id='leftTab'><i class="fa fa-minus leftTabIcon" aria-hidden="true"></i></div>
+			<h2><img src ='Rumblr_logo_transparent.png' alt='Rumblr, earthquake tracking and information sharing' class='pageTitle'></h2>
 			<h3>Results</h3>
 			<div class='totalEarthquakes' aria-live='assertive'>
 			</div>
@@ -41,7 +41,7 @@
 			</div>
 		</section>
 		<section class='right-section' hidden>
-			<div id='rightTab'></div>
+			<div id='rightTab'><i class="fa fa-minus rightTabIcon" aria-hidden="true"></i></div>
 			<h4>Earthquake News</h4>
 			<div class="right-top" aria-live='assertive'>
 			</div>
