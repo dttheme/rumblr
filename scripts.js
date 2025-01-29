@@ -338,25 +338,27 @@ function newsDataFromAPI() {
     sortBy: "relevancy",
     apiKey: "84025f0f2bdb42febe0bacbdc6c3391b",
   };
-  $.getJSON(NEWS_URL, query, function (data) {
-    let newsJSON = JSON.stringify(data, null, 2);
-    //pretty print JSON
-    // console.log(newsJSON);
-    if (data) {
-      for (let i = 0; i < data.articles.length; i++) {
-        let article = data.articles[i];
-        renderNews(article);
+  try {
+    $.getJSON(NEWS_URL, query, function (data) {
+      let newsJSON = JSON.stringify(data, null, 2);
+      //pretty print JSON
+      // console.log(newsJSON);
+      if (data) {
+        for (let i = 0; i < data.articles.length; i++) {
+          let article = data.articles[i];
+          renderNews(article);
+        }
       }
-    } else {
-      const result = {
-        title: "Searching for a public news API",
-        description:
-          "If you know of a good public news API, pleas let me know! For now, click through to see the code.",
-        url: "https://github.com/dttheme/rumblr",
-      };
-      renderNews(result);
-    }
-  });
+    });
+  } catch {
+    const result = {
+      title: "Searching for a public news API",
+      description:
+        "If you know of a good public news API, pleas let me know! For now, click through to see the code.",
+      url: "https://github.com/dttheme/rumblr",
+    };
+    renderNews(result);
+  }
 }
 
 //creates an element to hold the information for each news article
